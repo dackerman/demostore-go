@@ -107,8 +107,9 @@ func (r *ProductVariantService) Delete(ctx context.Context, productID string, va
 
 type ProductVariant struct {
 	ID        string             `json:"id,required"`
+	AddlPrice float64            `json:"addl_price,required"`
+	ImageURL  string             `json:"image_url,required"`
 	Name      string             `json:"name,required"`
-	Price     float64            `json:"price,required"`
 	ProductID string             `json:"product_id,required"`
 	JSON      productVariantJSON `json:"-"`
 }
@@ -116,8 +117,9 @@ type ProductVariant struct {
 // productVariantJSON contains the JSON metadata for the struct [ProductVariant]
 type productVariantJSON struct {
 	ID          apijson.Field
+	AddlPrice   apijson.Field
+	ImageURL    apijson.Field
 	Name        apijson.Field
-	Price       apijson.Field
 	ProductID   apijson.Field
 	raw         string
 	ExtraFields map[string]apijson.Field
@@ -153,8 +155,9 @@ func (r productVariantDeleteResponseJSON) RawJSON() string {
 }
 
 type ProductVariantNewParams struct {
-	Name  param.Field[string]  `json:"name,required"`
-	Price param.Field[float64] `json:"price,required"`
+	AddlPrice param.Field[float64] `json:"addl_price,required"`
+	ImageURL  param.Field[string]  `json:"image_url,required"`
+	Name      param.Field[string]  `json:"name,required"`
 }
 
 func (r ProductVariantNewParams) MarshalJSON() (data []byte, err error) {
@@ -162,8 +165,9 @@ func (r ProductVariantNewParams) MarshalJSON() (data []byte, err error) {
 }
 
 type ProductVariantUpdateParams struct {
-	Name  param.Field[string]  `json:"name,required"`
-	Price param.Field[float64] `json:"price,required"`
+	AddlPrice param.Field[float64] `json:"addl_price,required"`
+	ImageURL  param.Field[string]  `json:"image_url,required"`
+	Name      param.Field[string]  `json:"name,required"`
 }
 
 func (r ProductVariantUpdateParams) MarshalJSON() (data []byte, err error) {
