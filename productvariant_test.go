@@ -28,7 +28,6 @@ func TestProductVariantNew(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductVariantNewParams{
-			ID:    dackermanstore.F("id"),
 			Name:  dackermanstore.F("name"),
 			Price: dackermanstore.F(0.000000),
 		},

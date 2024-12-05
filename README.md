@@ -50,13 +50,10 @@ import (
 func main() {
 	client := dackermanstore.NewClient()
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		Product: dackermanstore.ProductParam{
-			ID:          dackermanstore.F("id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
-		},
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(0.000000),
 	})
 	if err != nil {
 		panic(err.Error())
@@ -180,13 +177,10 @@ To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
 _, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-	Product: dackermanstore.ProductParam{
-		ID:          dackermanstore.F("id"),
-		Description: dackermanstore.F("description"),
-		ImageURL:    dackermanstore.F("image_url"),
-		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
-	},
+	Description: dackermanstore.F("description"),
+	ImageURL:    dackermanstore.F("image_url"),
+	Name:        dackermanstore.F("name"),
+	Price:       dackermanstore.F(0.000000),
 })
 if err != nil {
 	var apierr *dackermanstore.Error
@@ -215,13 +209,10 @@ defer cancel()
 client.Products.New(
 	ctx,
 	dackermanstore.ProductNewParams{
-		Product: dackermanstore.ProductParam{
-			ID:          dackermanstore.F("id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
-		},
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(0.000000),
 	},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
@@ -259,13 +250,10 @@ client := dackermanstore.NewClient(
 client.Products.New(
 	context.TODO(),
 	dackermanstore.ProductNewParams{
-		Product: dackermanstore.ProductParam{
-			ID:          dackermanstore.F("id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
-		},
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(0.000000),
 	},
 	option.WithMaxRetries(5),
 )

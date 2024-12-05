@@ -115,18 +115,6 @@ func (r productJSON) RawJSON() string {
 	return r.raw
 }
 
-type ProductParam struct {
-	ID          param.Field[string]  `json:"id,required"`
-	Description param.Field[string]  `json:"description,required"`
-	ImageURL    param.Field[string]  `json:"image_url,required"`
-	Name        param.Field[string]  `json:"name,required"`
-	Price       param.Field[float64] `json:"price,required"`
-}
-
-func (r ProductParam) MarshalJSON() (data []byte, err error) {
-	return apijson.MarshalRoot(r)
-}
-
 type ProductDeleteResponse struct {
 	Success bool                      `json:"success,required"`
 	JSON    productDeleteResponseJSON `json:"-"`
@@ -149,11 +137,14 @@ func (r productDeleteResponseJSON) RawJSON() string {
 }
 
 type ProductNewParams struct {
-	Product ProductParam `json:"product,required"`
+	Description param.Field[string]  `json:"description,required"`
+	ImageURL    param.Field[string]  `json:"image_url,required"`
+	Name        param.Field[string]  `json:"name,required"`
+	Price       param.Field[float64] `json:"price,required"`
 }
 
 func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
-	return apijson.MarshalRoot(r.Product)
+	return apijson.MarshalRoot(r)
 }
 
 type ProductUpdateParams struct {
