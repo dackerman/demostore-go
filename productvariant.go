@@ -153,7 +153,6 @@ func (r productVariantDeleteResponseJSON) RawJSON() string {
 }
 
 type ProductVariantNewParams struct {
-	ID    param.Field[string]  `json:"id,required"`
 	Name  param.Field[string]  `json:"name,required"`
 	Price param.Field[float64] `json:"price,required"`
 }
