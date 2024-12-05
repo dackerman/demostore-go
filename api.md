@@ -1,9 +1,5 @@
 # Products
 
-Params Types:
-
-- <a href="https://pkg.go.dev/github.com/dackerman/demostore-go">dackermanstore</a>.<a href="https://pkg.go.dev/github.com/dackerman/demostore-go#ProductParam">ProductParam</a>
-
 Response Types:
 
 - <a href="https://pkg.go.dev/github.com/dackerman/demostore-go">dackermanstore</a>.<a href="https://pkg.go.dev/github.com/dackerman/demostore-go#Product">Product</a>
