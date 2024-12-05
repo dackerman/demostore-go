@@ -225,5 +225,5 @@ func WithRequestTimeout(dur time.Duration) RequestOption {
 // environment to be the "production" environment. An environment specifies which base URL
 // to use by default.
 func WithEnvironmentProduction() RequestOption {
-	return WithBaseURL("https://localhost:8000//")
+	return WithBaseURL("http://localhost:8000//")
 }
