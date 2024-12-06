@@ -53,7 +53,7 @@ func main() {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err != nil {
 		panic(err.Error())
@@ -180,7 +180,7 @@ _, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
 	Description: dackermanstore.F("description"),
 	ImageURL:    dackermanstore.F("image_url"),
 	Name:        dackermanstore.F("name"),
-	Price:       dackermanstore.F(0.000000),
+	Price:       dackermanstore.F(int64(0)),
 })
 if err != nil {
 	var apierr *dackermanstore.Error
@@ -212,7 +212,7 @@ client.Products.New(
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
@@ -253,7 +253,7 @@ client.Products.New(
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	},
 	option.WithMaxRetries(5),
 )

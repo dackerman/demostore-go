@@ -27,7 +27,7 @@ func TestUsage(t *testing.T) {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err != nil {
 		t.Error(err)

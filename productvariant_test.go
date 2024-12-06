@@ -28,9 +28,9 @@ func TestProductVariantNew(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductVariantNewParams{
-			AddlPrice: dackermanstore.F(0.000000),
-			ImageURL:  dackermanstore.F("image_url"),
-			Name:      dackermanstore.F("name"),
+			ImageURL: dackermanstore.F("image_url"),
+			Name:     dackermanstore.F("name"),
+			Price:    dackermanstore.F(int64(0)),
 		},
 	)
 	if err != nil {
@@ -83,9 +83,9 @@ func TestProductVariantUpdate(t *testing.T) {
 		"product_id",
 		"variant_id",
 		dackermanstore.ProductVariantUpdateParams{
-			AddlPrice: dackermanstore.F(0.000000),
-			ImageURL:  dackermanstore.F("image_url"),
-			Name:      dackermanstore.F("name"),
+			ImageURL: dackermanstore.F("image_url"),
+			Name:     dackermanstore.F("name"),
+			Price:    dackermanstore.F(int64(0)),
 		},
 	)
 	if err != nil {
