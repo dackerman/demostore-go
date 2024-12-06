@@ -79,21 +79,21 @@ func (r *ProductVariantService) Delete(ctx context.Context, productID int64, var
 
 // Represents a ProductVariant record
 type ProductVariant struct {
-	ID        int64              `json:"id,required"`
 	AddlPrice float64            `json:"addl_price,required"`
 	ImageURL  string             `json:"image_url,required"`
 	Name      string             `json:"name,required"`
-	ProductID string             `json:"product_id,required"`
+	ProductID int64              `json:"product_id,required"`
+	VariantID int64              `json:"variant_id,required"`
 	JSON      productVariantJSON `json:"-"`
 }
 
 // productVariantJSON contains the JSON metadata for the struct [ProductVariant]
 type productVariantJSON struct {
-	ID          apijson.Field
 	AddlPrice   apijson.Field
 	ImageURL    apijson.Field
 	Name        apijson.Field
 	ProductID   apijson.Field
+	VariantID   apijson.Field
 	raw         string
 	ExtraFields map[string]apijson.Field
 }
