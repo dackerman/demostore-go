@@ -58,7 +58,7 @@ func main() {
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", product.ID)
+	fmt.Printf("%+v\n", product.ProductID)
 }
 
 ```

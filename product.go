@@ -76,21 +76,21 @@ func (r *ProductService) Delete(ctx context.Context, productID int64, opts ...op
 
 // Represents a Product record
 type Product struct {
-	ID          int64       `json:"id,required"`
 	Description string      `json:"description,required"`
 	ImageURL    string      `json:"image_url,required"`
 	Name        string      `json:"name,required"`
 	Price       float64     `json:"price,required"`
+	ProductID   int64       `json:"product_id,required"`
 	JSON        productJSON `json:"-"`
 }
 
 // productJSON contains the JSON metadata for the struct [Product]
 type productJSON struct {
-	ID          apijson.Field
 	Description apijson.Field
 	ImageURL    apijson.Field
 	Name        apijson.Field
 	Price       apijson.Field
+	ProductID   apijson.Field
 	raw         string
 	ExtraFields map[string]apijson.Field
 }
