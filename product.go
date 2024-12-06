@@ -4,7 +4,6 @@ package dackermanstore
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net/http"
 
@@ -44,25 +43,17 @@ func (r *ProductService) New(ctx context.Context, body ProductNewParams, opts ..
 }
 
 // Read Product
-func (r *ProductService) Get(ctx context.Context, productID string, opts ...option.RequestOption) (res *Product, err error) {
+func (r *ProductService) Get(ctx context.Context, productID int64, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
-	if productID == "" {
-		err = errors.New("missing required product_id parameter")
-		return
-	}
-	path := fmt.Sprintf("products/%s", productID)
+	path := fmt.Sprintf("products/%v", productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
 }
 
 // Update Product
-func (r *ProductService) Update(ctx context.Context, productID string, body ProductUpdateParams, opts ...option.RequestOption) (res *Product, err error) {
+func (r *ProductService) Update(ctx context.Context, productID int64, body ProductUpdateParams, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
-	if productID == "" {
-		err = errors.New("missing required product_id parameter")
-		return
-	}
-	path := fmt.Sprintf("products/%s", productID)
+	path := fmt.Sprintf("products/%v", productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, body, &res, opts...)
 	return
 }
@@ -76,19 +67,16 @@ func (r *ProductService) List(ctx context.Context, opts ...option.RequestOption)
 }
 
 // Delete Product
-func (r *ProductService) Delete(ctx context.Context, productID string, opts ...option.RequestOption) (res *ProductDeleteResponse, err error) {
+func (r *ProductService) Delete(ctx context.Context, productID int64, opts ...option.RequestOption) (res *ProductDeleteResponse, err error) {
 	opts = append(r.Options[:], opts...)
-	if productID == "" {
-		err = errors.New("missing required product_id parameter")
-		return
-	}
-	path := fmt.Sprintf("products/%s", productID)
+	path := fmt.Sprintf("products/%v", productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, nil, &res, opts...)
 	return
 }
 
+// Represents a Product record
 type Product struct {
-	ID          string      `json:"id,required"`
+	ID          int64       `json:"id,required"`
 	Description string      `json:"description,required"`
 	ImageURL    string      `json:"image_url,required"`
 	Name        string      `json:"name,required"`
@@ -141,6 +129,7 @@ type ProductNewParams struct {
 	ImageURL    param.Field[string]  `json:"image_url,required"`
 	Name        param.Field[string]  `json:"name,required"`
 	Price       param.Field[float64] `json:"price,required"`
+	ID          param.Field[int64]   `json:"id"`
 }
 
 func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
@@ -148,12 +137,160 @@ func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
 }
 
 type ProductUpdateParams struct {
-	Description param.Field[string]  `json:"description,required"`
-	ImageURL    param.Field[string]  `json:"image_url,required"`
-	Name        param.Field[string]  `json:"name,required"`
-	Price       param.Field[float64] `json:"price,required"`
+	ID          param.Field[ProductUpdateParamsIDUnion]    `json:"id"`
+	Description param.Field[string]                        `json:"description"`
+	ImageURL    param.Field[string]                        `json:"image_url"`
+	Name        param.Field[string]                        `json:"name"`
+	Price       param.Field[ProductUpdateParamsPriceUnion] `json:"price"`
 }
 
 func (r ProductUpdateParams) MarshalJSON() (data []byte, err error) {
 	return apijson.MarshalRoot(r)
 }
+
+type ProductUpdateParamsID struct {
+	Decrement param.Field[int64] `json:"decrement"`
+	Divide    param.Field[int64] `json:"divide"`
+	Increment param.Field[int64] `json:"increment"`
+	Multiply  param.Field[int64] `json:"multiply"`
+	Set       param.Field[int64] `json:"set"`
+}
+
+func (r ProductUpdateParamsID) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsID) ImplementsProductUpdateParamsIDUnion() {}
+
+// Satisfied by [ProductUpdateParamsIDIntSetInput],
+// [ProductUpdateParamsIDIntDivideInput], [ProductUpdateParamsIDIntMultiplyInput],
+// [ProductUpdateParamsIDIntIncrementInput],
+// [ProductUpdateParamsIDIntDecrementInput], [shared.UnionInt],
+// [ProductUpdateParamsID].
+type ProductUpdateParamsIDUnion interface {
+	ImplementsProductUpdateParamsIDUnion()
+}
+
+type ProductUpdateParamsIDIntSetInput struct {
+	Set param.Field[int64] `json:"set,required"`
+}
+
+func (r ProductUpdateParamsIDIntSetInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsIDIntSetInput) ImplementsProductUpdateParamsIDUnion() {}
+
+type ProductUpdateParamsIDIntDivideInput struct {
+	Divide param.Field[int64] `json:"divide,required"`
+}
+
+func (r ProductUpdateParamsIDIntDivideInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsIDIntDivideInput) ImplementsProductUpdateParamsIDUnion() {}
+
+type ProductUpdateParamsIDIntMultiplyInput struct {
+	Multiply param.Field[int64] `json:"multiply,required"`
+}
+
+func (r ProductUpdateParamsIDIntMultiplyInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsIDIntMultiplyInput) ImplementsProductUpdateParamsIDUnion() {}
+
+type ProductUpdateParamsIDIntIncrementInput struct {
+	Increment param.Field[int64] `json:"increment,required"`
+}
+
+func (r ProductUpdateParamsIDIntIncrementInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsIDIntIncrementInput) ImplementsProductUpdateParamsIDUnion() {}
+
+type ProductUpdateParamsIDIntDecrementInput struct {
+	Decrement param.Field[int64] `json:"decrement,required"`
+}
+
+func (r ProductUpdateParamsIDIntDecrementInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsIDIntDecrementInput) ImplementsProductUpdateParamsIDUnion() {}
+
+type ProductUpdateParamsPrice struct {
+	Decrement param.Field[float64] `json:"decrement"`
+	Divide    param.Field[float64] `json:"divide"`
+	Increment param.Field[float64] `json:"increment"`
+	Multiply  param.Field[float64] `json:"multiply"`
+	Set       param.Field[float64] `json:"set"`
+}
+
+func (r ProductUpdateParamsPrice) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsPrice) ImplementsProductUpdateParamsPriceUnion() {}
+
+// Satisfied by [ProductUpdateParamsPriceFloatSetInput],
+// [ProductUpdateParamsPriceFloatDivideInput],
+// [ProductUpdateParamsPriceFloatMultiplyInput],
+// [ProductUpdateParamsPriceFloatIncrementInput],
+// [ProductUpdateParamsPriceFloatDecrementInput], [shared.UnionFloat],
+// [ProductUpdateParamsPrice].
+type ProductUpdateParamsPriceUnion interface {
+	ImplementsProductUpdateParamsPriceUnion()
+}
+
+type ProductUpdateParamsPriceFloatSetInput struct {
+	Set param.Field[float64] `json:"set,required"`
+}
+
+func (r ProductUpdateParamsPriceFloatSetInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsPriceFloatSetInput) ImplementsProductUpdateParamsPriceUnion() {}
+
+type ProductUpdateParamsPriceFloatDivideInput struct {
+	Divide param.Field[float64] `json:"divide,required"`
+}
+
+func (r ProductUpdateParamsPriceFloatDivideInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsPriceFloatDivideInput) ImplementsProductUpdateParamsPriceUnion() {}
+
+type ProductUpdateParamsPriceFloatMultiplyInput struct {
+	Multiply param.Field[float64] `json:"multiply,required"`
+}
+
+func (r ProductUpdateParamsPriceFloatMultiplyInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsPriceFloatMultiplyInput) ImplementsProductUpdateParamsPriceUnion() {}
+
+type ProductUpdateParamsPriceFloatIncrementInput struct {
+	Increment param.Field[float64] `json:"increment,required"`
+}
+
+func (r ProductUpdateParamsPriceFloatIncrementInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsPriceFloatIncrementInput) ImplementsProductUpdateParamsPriceUnion() {}
+
+type ProductUpdateParamsPriceFloatDecrementInput struct {
+	Decrement param.Field[float64] `json:"decrement,required"`
+}
+
+func (r ProductUpdateParamsPriceFloatDecrementInput) MarshalJSON() (data []byte, err error) {
+	return apijson.MarshalRoot(r)
+}
+
+func (r ProductUpdateParamsPriceFloatDecrementInput) ImplementsProductUpdateParamsPriceUnion() {}
