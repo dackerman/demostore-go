@@ -13,7 +13,7 @@ import (
 	"github.com/dackerman/demostore-go/option"
 )
 
-func TestProductVariantNewWithOptionalParams(t *testing.T) {
+func TestProductVariantNew(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -24,14 +24,15 @@ func TestProductVariantNewWithOptionalParams(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 	)
-	_, err := client.Products.Variants.New(context.TODO(), dackermanstore.ProductVariantNewParams{
-		PathProductID: dackermanstore.F("product_id"),
-		AddlPrice:     dackermanstore.F(0.000000),
-		ImageURL:      dackermanstore.F("image_url"),
-		Name:          dackermanstore.F("name"),
-		BodyProductID: dackermanstore.F("product_id"),
-		ID:            dackermanstore.F(int64(0)),
-	})
+	_, err := client.Products.Variants.New(
+		context.TODO(),
+		"product_id",
+		dackermanstore.ProductVariantNewParams{
+			AddlPrice: dackermanstore.F(0.000000),
+			ImageURL:  dackermanstore.F("image_url"),
+			Name:      dackermanstore.F("name"),
+		},
+	)
 	if err != nil {
 		var apierr *dackermanstore.Error
 		if errors.As(err, &apierr) {
@@ -66,7 +67,7 @@ func TestProductVariantGet(t *testing.T) {
 	}
 }
 
-func TestProductVariantUpdateWithOptionalParams(t *testing.T) {
+func TestProductVariantUpdate(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -80,17 +81,11 @@ func TestProductVariantUpdateWithOptionalParams(t *testing.T) {
 	_, err := client.Products.Variants.Update(
 		context.TODO(),
 		int64(0),
+		int64(0),
 		dackermanstore.ProductVariantUpdateParams{
-			PathProductID: dackermanstore.F(int64(0)),
-			ID: dackermanstore.F[dackermanstore.ProductVariantUpdateParamsIDUnion](dackermanstore.ProductVariantUpdateParamsIDIntSetInput{
-				Set: dackermanstore.F(int64(0)),
-			}),
-			AddlPrice: dackermanstore.F[dackermanstore.ProductVariantUpdateParamsAddlPriceUnion](dackermanstore.ProductVariantUpdateParamsAddlPriceFloatSetInput{
-				Set: dackermanstore.F(0.000000),
-			}),
-			ImageURL:      dackermanstore.F("image_url"),
-			Name:          dackermanstore.F("name"),
-			BodyProductID: dackermanstore.F("product_id"),
+			AddlPrice: dackermanstore.F(0.000000),
+			ImageURL:  dackermanstore.F("image_url"),
+			Name:      dackermanstore.F("name"),
 		},
 	)
 	if err != nil {
