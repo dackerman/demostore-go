@@ -41,7 +41,7 @@ func TestUserAgentHeader(t *testing.T) {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if userAgent != fmt.Sprintf("StainlessStore/Go %s", internal.PackageVersion) {
 		t.Errorf("Expected User-Agent to be correct, but got: %#v", userAgent)
@@ -69,7 +69,7 @@ func TestRetryAfter(t *testing.T) {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil || res != nil {
 		t.Error("Expected there to be a cancel error and for the response to be nil")
@@ -108,7 +108,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil || res != nil {
 		t.Error("Expected there to be a cancel error and for the response to be nil")
@@ -142,7 +142,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil || res != nil {
 		t.Error("Expected there to be a cancel error and for the response to be nil")
@@ -175,7 +175,7 @@ func TestRetryAfterMs(t *testing.T) {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil || res != nil {
 		t.Error("Expected there to be a cancel error and for the response to be nil")
@@ -202,7 +202,7 @@ func TestContextCancel(t *testing.T) {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil || res != nil {
 		t.Error("Expected there to be a cancel error and for the response to be nil")
@@ -226,7 +226,7 @@ func TestContextCancelDelay(t *testing.T) {
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil || res != nil {
 		t.Error("expected there to be a cancel error and for the response to be nil")
@@ -256,7 +256,7 @@ func TestContextDeadline(t *testing.T) {
 			Description: dackermanstore.F("description"),
 			ImageURL:    dackermanstore.F("image_url"),
 			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
+			Price:       dackermanstore.F(int64(0)),
 		})
 		if err == nil || res != nil {
 			t.Error("expected there to be a deadline error and for the response to be nil")
