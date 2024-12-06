@@ -55,8 +55,8 @@ func TestProductVariantGet(t *testing.T) {
 	)
 	_, err := client.Products.Variants.Get(
 		context.TODO(),
-		int64(0),
-		int64(0),
+		"product_id",
+		"variant_id",
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -80,8 +80,8 @@ func TestProductVariantUpdate(t *testing.T) {
 	)
 	_, err := client.Products.Variants.Update(
 		context.TODO(),
-		int64(0),
-		int64(0),
+		"product_id",
+		"variant_id",
 		dackermanstore.ProductVariantUpdateParams{
 			AddlPrice: dackermanstore.F(0.000000),
 			ImageURL:  dackermanstore.F("image_url"),
@@ -108,7 +108,7 @@ func TestProductVariantList(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 	)
-	_, err := client.Products.Variants.List(context.TODO(), int64(0))
+	_, err := client.Products.Variants.List(context.TODO(), "product_id")
 	if err != nil {
 		var apierr *dackermanstore.Error
 		if errors.As(err, &apierr) {
@@ -131,8 +131,8 @@ func TestProductVariantDelete(t *testing.T) {
 	)
 	_, err := client.Products.Variants.Delete(
 		context.TODO(),
-		int64(0),
-		int64(0),
+		"product_id",
+		"variant_id",
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error

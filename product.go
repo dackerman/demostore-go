@@ -4,6 +4,7 @@ package dackermanstore
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -43,17 +44,25 @@ func (r *ProductService) New(ctx context.Context, body ProductNewParams, opts ..
 }
 
 // Read Product
-func (r *ProductService) Get(ctx context.Context, productID int64, opts ...option.RequestOption) (res *Product, err error) {
+func (r *ProductService) Get(ctx context.Context, productID string, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
-	path := fmt.Sprintf("products/%v", productID)
+	if productID == "" {
+		err = errors.New("missing required product_id parameter")
+		return
+	}
+	path := fmt.Sprintf("products/%s", productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
 }
 
 // Update Product
-func (r *ProductService) Update(ctx context.Context, productID int64, body ProductUpdateParams, opts ...option.RequestOption) (res *Product, err error) {
+func (r *ProductService) Update(ctx context.Context, productID string, body ProductUpdateParams, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
-	path := fmt.Sprintf("products/%v", productID)
+	if productID == "" {
+		err = errors.New("missing required product_id parameter")
+		return
+	}
+	path := fmt.Sprintf("products/%s", productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, body, &res, opts...)
 	return
 }
@@ -67,9 +76,13 @@ func (r *ProductService) List(ctx context.Context, opts ...option.RequestOption)
 }
 
 // Delete Product
-func (r *ProductService) Delete(ctx context.Context, productID int64, opts ...option.RequestOption) (res *ProductDeleteResponse, err error) {
+func (r *ProductService) Delete(ctx context.Context, productID string, opts ...option.RequestOption) (res *ProductDeleteResponse, err error) {
 	opts = append(r.Options[:], opts...)
-	path := fmt.Sprintf("products/%v", productID)
+	if productID == "" {
+		err = errors.New("missing required product_id parameter")
+		return
+	}
+	path := fmt.Sprintf("products/%s", productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, nil, &res, opts...)
 	return
 }
@@ -80,7 +93,7 @@ type Product struct {
 	ImageURL    string      `json:"image_url,required"`
 	Name        string      `json:"name,required"`
 	Price       float64     `json:"price,required"`
-	ProductID   int64       `json:"product_id,required"`
+	ProductID   string      `json:"product_id,required"`
 	JSON        productJSON `json:"-"`
 }
 
