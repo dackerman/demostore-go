@@ -46,33 +46,61 @@ func (r *ProductVariantService) New(ctx context.Context, productID string, body 
 }
 
 // Read Product Variant
-func (r *ProductVariantService) Get(ctx context.Context, productID int64, variantID int64, opts ...option.RequestOption) (res *ProductVariant, err error) {
+func (r *ProductVariantService) Get(ctx context.Context, productID string, variantID string, opts ...option.RequestOption) (res *ProductVariant, err error) {
 	opts = append(r.Options[:], opts...)
-	path := fmt.Sprintf("products/%v/variants/%v", productID, variantID)
+	if productID == "" {
+		err = errors.New("missing required product_id parameter")
+		return
+	}
+	if variantID == "" {
+		err = errors.New("missing required variant_id parameter")
+		return
+	}
+	path := fmt.Sprintf("products/%s/variants/%s", productID, variantID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
 }
 
 // Update Product Variant
-func (r *ProductVariantService) Update(ctx context.Context, productID int64, variantID int64, body ProductVariantUpdateParams, opts ...option.RequestOption) (res *ProductVariant, err error) {
+func (r *ProductVariantService) Update(ctx context.Context, productID string, variantID string, body ProductVariantUpdateParams, opts ...option.RequestOption) (res *ProductVariant, err error) {
 	opts = append(r.Options[:], opts...)
-	path := fmt.Sprintf("products/%v/variants/%v", productID, variantID)
+	if productID == "" {
+		err = errors.New("missing required product_id parameter")
+		return
+	}
+	if variantID == "" {
+		err = errors.New("missing required variant_id parameter")
+		return
+	}
+	path := fmt.Sprintf("products/%s/variants/%s", productID, variantID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, body, &res, opts...)
 	return
 }
 
 // Read Product Variants
-func (r *ProductVariantService) List(ctx context.Context, productID int64, opts ...option.RequestOption) (res *[]ProductVariant, err error) {
+func (r *ProductVariantService) List(ctx context.Context, productID string, opts ...option.RequestOption) (res *[]ProductVariant, err error) {
 	opts = append(r.Options[:], opts...)
-	path := fmt.Sprintf("products/%v/variants", productID)
+	if productID == "" {
+		err = errors.New("missing required product_id parameter")
+		return
+	}
+	path := fmt.Sprintf("products/%s/variants", productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
 }
 
 // Delete Product Variant
-func (r *ProductVariantService) Delete(ctx context.Context, productID int64, variantID int64, opts ...option.RequestOption) (res *ProductVariantDeleteResponse, err error) {
+func (r *ProductVariantService) Delete(ctx context.Context, productID string, variantID string, opts ...option.RequestOption) (res *ProductVariantDeleteResponse, err error) {
 	opts = append(r.Options[:], opts...)
-	path := fmt.Sprintf("products/%v/variants/%v", productID, variantID)
+	if productID == "" {
+		err = errors.New("missing required product_id parameter")
+		return
+	}
+	if variantID == "" {
+		err = errors.New("missing required variant_id parameter")
+		return
+	}
+	path := fmt.Sprintf("products/%s/variants/%s", productID, variantID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, nil, &res, opts...)
 	return
 }
@@ -82,8 +110,8 @@ type ProductVariant struct {
 	AddlPrice float64            `json:"addl_price,required"`
 	ImageURL  string             `json:"image_url,required"`
 	Name      string             `json:"name,required"`
-	ProductID int64              `json:"product_id,required"`
-	VariantID int64              `json:"variant_id,required"`
+	ProductID string             `json:"product_id,required"`
+	VariantID string             `json:"variant_id,required"`
 	JSON      productVariantJSON `json:"-"`
 }
 

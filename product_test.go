@@ -50,7 +50,7 @@ func TestProductGet(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 	)
-	_, err := client.Products.Get(context.TODO(), int64(0))
+	_, err := client.Products.Get(context.TODO(), "product_id")
 	if err != nil {
 		var apierr *dackermanstore.Error
 		if errors.As(err, &apierr) {
@@ -73,7 +73,7 @@ func TestProductUpdate(t *testing.T) {
 	)
 	_, err := client.Products.Update(
 		context.TODO(),
-		int64(0),
+		"product_id",
 		dackermanstore.ProductUpdateParams{
 			Description: dackermanstore.F("description"),
 			ImageURL:    dackermanstore.F("image_url"),
@@ -122,7 +122,7 @@ func TestProductDelete(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 	)
-	_, err := client.Products.Delete(context.TODO(), int64(0))
+	_, err := client.Products.Delete(context.TODO(), "product_id")
 	if err != nil {
 		var apierr *dackermanstore.Error
 		if errors.As(err, &apierr) {
