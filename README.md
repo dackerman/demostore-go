@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/dackerman/demostore-go@v0.0.1-alpha.0'
+go get -u 'github.com/dackerman/demostore-go@v0.1.0-alpha.1'
 ```
 
 <!-- x-release-please-end -->
@@ -50,18 +50,15 @@ import (
 func main() {
 	client := dackermanstore.NewClient()
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		Product: dackermanstore.ProductParam{
-			ID:          dackermanstore.F("id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
-		},
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("%+v\n", product.ID)
+	fmt.Printf("%+v\n", product.ProductID)
 }
 
 ```
@@ -180,13 +177,10 @@ To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
 _, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-	Product: dackermanstore.ProductParam{
-		ID:          dackermanstore.F("id"),
-		Description: dackermanstore.F("description"),
-		ImageURL:    dackermanstore.F("image_url"),
-		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(0.000000),
-	},
+	Description: dackermanstore.F("description"),
+	ImageURL:    dackermanstore.F("image_url"),
+	Name:        dackermanstore.F("name"),
+	Price:       dackermanstore.F(int64(0)),
 })
 if err != nil {
 	var apierr *dackermanstore.Error
@@ -215,13 +209,10 @@ defer cancel()
 client.Products.New(
 	ctx,
 	dackermanstore.ProductNewParams{
-		Product: dackermanstore.ProductParam{
-			ID:          dackermanstore.F("id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
-		},
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	},
 	// This sets the per-retry timeout
 	option.WithRequestTimeout(20*time.Second),
@@ -259,13 +250,10 @@ client := dackermanstore.NewClient(
 client.Products.New(
 	context.TODO(),
 	dackermanstore.ProductNewParams{
-		Product: dackermanstore.ProductParam{
-			ID:          dackermanstore.F("id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
-		},
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	},
 	option.WithMaxRetries(5),
 )

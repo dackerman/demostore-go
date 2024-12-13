@@ -24,16 +24,13 @@ func TestUsage(t *testing.T) {
 		option.WithBaseURL(baseURL),
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		Product: dackermanstore.ProductParam{
-			ID:          dackermanstore.F("id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
-		},
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err != nil {
 		t.Error(err)
 	}
-	t.Logf("%+v\n", product.ID)
+	t.Logf("%+v\n", product.ProductID)
 }

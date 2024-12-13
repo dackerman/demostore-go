@@ -25,13 +25,10 @@ func TestProductNew(t *testing.T) {
 		option.WithBaseURL(baseURL),
 	)
 	_, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		Product: dackermanstore.ProductParam{
-			ID:          dackermanstore.F("id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
-		},
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -81,7 +78,7 @@ func TestProductUpdate(t *testing.T) {
 			Description: dackermanstore.F("description"),
 			ImageURL:    dackermanstore.F("image_url"),
 			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(0.000000),
+			Price:       dackermanstore.F(int64(0)),
 		},
 	)
 	if err != nil {

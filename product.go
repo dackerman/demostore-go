@@ -87,22 +87,23 @@ func (r *ProductService) Delete(ctx context.Context, productID string, opts ...o
 	return
 }
 
+// Represents a Product record
 type Product struct {
-	ID          string      `json:"id,required"`
 	Description string      `json:"description,required"`
 	ImageURL    string      `json:"image_url,required"`
 	Name        string      `json:"name,required"`
-	Price       float64     `json:"price,required"`
+	Price       int64       `json:"price,required"`
+	ProductID   string      `json:"product_id,required"`
 	JSON        productJSON `json:"-"`
 }
 
 // productJSON contains the JSON metadata for the struct [Product]
 type productJSON struct {
-	ID          apijson.Field
 	Description apijson.Field
 	ImageURL    apijson.Field
 	Name        apijson.Field
 	Price       apijson.Field
+	ProductID   apijson.Field
 	raw         string
 	ExtraFields map[string]apijson.Field
 }
@@ -113,18 +114,6 @@ func (r *Product) UnmarshalJSON(data []byte) (err error) {
 
 func (r productJSON) RawJSON() string {
 	return r.raw
-}
-
-type ProductParam struct {
-	ID          param.Field[string]  `json:"id,required"`
-	Description param.Field[string]  `json:"description,required"`
-	ImageURL    param.Field[string]  `json:"image_url,required"`
-	Name        param.Field[string]  `json:"name,required"`
-	Price       param.Field[float64] `json:"price,required"`
-}
-
-func (r ProductParam) MarshalJSON() (data []byte, err error) {
-	return apijson.MarshalRoot(r)
 }
 
 type ProductDeleteResponse struct {
@@ -149,18 +138,21 @@ func (r productDeleteResponseJSON) RawJSON() string {
 }
 
 type ProductNewParams struct {
-	Product ProductParam `json:"product,required"`
+	Description param.Field[string] `json:"description,required"`
+	ImageURL    param.Field[string] `json:"image_url,required"`
+	Name        param.Field[string] `json:"name,required"`
+	Price       param.Field[int64]  `json:"price,required"`
 }
 
 func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
-	return apijson.MarshalRoot(r.Product)
+	return apijson.MarshalRoot(r)
 }
 
 type ProductUpdateParams struct {
-	Description param.Field[string]  `json:"description,required"`
-	ImageURL    param.Field[string]  `json:"image_url,required"`
-	Name        param.Field[string]  `json:"name,required"`
-	Price       param.Field[float64] `json:"price,required"`
+	Description param.Field[string] `json:"description,required"`
+	ImageURL    param.Field[string] `json:"image_url,required"`
+	Name        param.Field[string] `json:"name,required"`
+	Price       param.Field[int64]  `json:"price,required"`
 }
 
 func (r ProductUpdateParams) MarshalJSON() (data []byte, err error) {
