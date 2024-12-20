@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/dackerman/demostore-go@v0.1.0-alpha.1'
+go get -u 'github.com/dackerman/demostore-go@v0.1.0-alpha.2'
 ```
 
 <!-- x-release-please-end -->
@@ -108,7 +108,7 @@ if res.Name == "" {
 	// true if `"name"` is either not present or explicitly null
 	res.JSON.Name.IsNull()
 
-	// true if the `"name"` key was not present in the repsonse JSON at all
+	// true if the `"name"` key was not present in the response JSON at all
 	res.JSON.Name.IsMissing()
 
 	// When the API returns data that cannot be coerced to the expected type:

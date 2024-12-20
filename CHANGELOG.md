@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2024-12-20)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/dackerman/demostore-go/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Chores
+
+* **internal:** codegen related update ([#12](https://github.com/dackerman/demostore-go/issues/12)) ([7c5af9c](https://github.com/dackerman/demostore-go/commit/7c5af9c64c84a6e8afd9a99e2121f09cecf49cee))
+
 ## 0.1.0-alpha.1 (2024-12-06)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/dackerman/demostore-go/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
