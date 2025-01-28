@@ -91,7 +91,7 @@ func (r *ProductService) Delete(ctx context.Context, productID string, opts ...o
 type Product struct {
 	Description string `json:"description,required"`
 	ImageURL    string `json:"image_url,required"`
-	// The name of the Product.
+	// The name of the Product
 	Name      string      `json:"name,required"`
 	Price     int64       `json:"price,required"`
 	ProductID string      `json:"product_id,required"`
