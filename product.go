@@ -138,10 +138,11 @@ func (r productDeleteResponseJSON) RawJSON() string {
 }
 
 type ProductNewParams struct {
-	Description param.Field[string] `json:"description,required"`
-	ImageURL    param.Field[string] `json:"image_url,required"`
-	Name        param.Field[string] `json:"name,required"`
-	Price       param.Field[int64]  `json:"price,required"`
+	Description     param.Field[string] `json:"description,required"`
+	ImageURL        param.Field[string] `json:"image_url,required"`
+	Name            param.Field[string] `json:"name,required"`
+	Price           param.Field[int64]  `json:"price,required"`
+	LongDescription param.Field[string] `json:"long_description"`
 }
 
 func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
@@ -149,10 +150,11 @@ func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
 }
 
 type ProductUpdateParams struct {
-	Description param.Field[string] `json:"description,required"`
-	ImageURL    param.Field[string] `json:"image_url,required"`
-	Name        param.Field[string] `json:"name,required"`
-	Price       param.Field[int64]  `json:"price,required"`
+	Description     param.Field[string] `json:"description,required"`
+	ImageURL        param.Field[string] `json:"image_url,required"`
+	Name            param.Field[string] `json:"name,required"`
+	Price           param.Field[int64]  `json:"price,required"`
+	LongDescription param.Field[string] `json:"long_description"`
 }
 
 func (r ProductUpdateParams) MarshalJSON() (data []byte, err error) {

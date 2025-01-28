@@ -13,7 +13,7 @@ import (
 	"github.com/dackerman/demostore-go/option"
 )
 
-func TestProductNew(t *testing.T) {
+func TestProductNewWithOptionalParams(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -25,10 +25,11 @@ func TestProductNew(t *testing.T) {
 		option.WithBaseURL(baseURL),
 	)
 	_, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		Description: dackermanstore.F("description"),
-		ImageURL:    dackermanstore.F("image_url"),
-		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(int64(0)),
+		Description:     dackermanstore.F("description"),
+		ImageURL:        dackermanstore.F("image_url"),
+		Name:            dackermanstore.F("name"),
+		Price:           dackermanstore.F(int64(0)),
+		LongDescription: dackermanstore.F("long_description"),
 	})
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -60,7 +61,7 @@ func TestProductGet(t *testing.T) {
 	}
 }
 
-func TestProductUpdate(t *testing.T) {
+func TestProductUpdateWithOptionalParams(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -75,10 +76,11 @@ func TestProductUpdate(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductUpdateParams{
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(int64(0)),
+			Description:     dackermanstore.F("description"),
+			ImageURL:        dackermanstore.F("image_url"),
+			Name:            dackermanstore.F("name"),
+			Price:           dackermanstore.F(int64(0)),
+			LongDescription: dackermanstore.F("long_description"),
 		},
 	)
 	if err != nil {
