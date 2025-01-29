@@ -23,6 +23,7 @@ func TestProductNewWithOptionalParams(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
 		Description:     dackermanstore.F("description"),
@@ -50,6 +51,7 @@ func TestProductGet(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.Get(context.TODO(), "product_id")
 	if err != nil {
@@ -71,6 +73,7 @@ func TestProductUpdateWithOptionalParams(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.Update(
 		context.TODO(),
@@ -102,6 +105,7 @@ func TestProductList(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.List(context.TODO())
 	if err != nil {
@@ -123,6 +127,7 @@ func TestProductDelete(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.Delete(context.TODO(), "product_id")
 	if err != nil {

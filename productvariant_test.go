@@ -23,6 +23,7 @@ func TestProductVariantNew(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.Variants.New(
 		context.TODO(),
@@ -52,6 +53,7 @@ func TestProductVariantGet(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.Variants.Get(
 		context.TODO(),
@@ -77,6 +79,7 @@ func TestProductVariantUpdate(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.Variants.Update(
 		context.TODO(),
@@ -107,6 +110,7 @@ func TestProductVariantList(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.Variants.List(context.TODO(), "product_id")
 	if err != nil {
@@ -128,6 +132,7 @@ func TestProductVariantDelete(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	_, err := client.Products.Variants.Delete(
 		context.TODO(),
