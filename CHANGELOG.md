@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2025-01-29)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/dackerman/demostore-go/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** update via SDK Studio ([#16](https://github.com/dackerman/demostore-go/issues/16)) ([0f083fd](https://github.com/dackerman/demostore-go/commit/0f083fd634ae15ae39b873c440517d42f3496250))
+* **api:** update via SDK Studio ([#17](https://github.com/dackerman/demostore-go/issues/17)) ([b19a538](https://github.com/dackerman/demostore-go/commit/b19a53883d7ee2da24cf08c2f863ce814b747130))
+* **api:** update via SDK Studio ([#18](https://github.com/dackerman/demostore-go/issues/18)) ([cfe80be](https://github.com/dackerman/demostore-go/commit/cfe80be505ecfaacea144cb66bbb3e9460d1e27f))
+* **api:** update via SDK Studio ([#20](https://github.com/dackerman/demostore-go/issues/20)) ([527c31c](https://github.com/dackerman/demostore-go/commit/527c31c46d4bed6e17faac5abc75233ff36527cb))
+* **api:** update via SDK Studio ([#21](https://github.com/dackerman/demostore-go/issues/21)) ([0a3a430](https://github.com/dackerman/demostore-go/commit/0a3a430c3eefe5eb300de10667c8501c3aaf9a04))
+
+
+### Chores
+
+* **internal:** codegen related update ([#12](https://github.com/dackerman/demostore-go/issues/12)) ([7c5af9c](https://github.com/dackerman/demostore-go/commit/7c5af9c64c84a6e8afd9a99e2121f09cecf49cee))
+* **internal:** codegen related update ([#14](https://github.com/dackerman/demostore-go/issues/14)) ([2f3e1fa](https://github.com/dackerman/demostore-go/commit/2f3e1fa5556e2aed8a8378945074e56836a5c7ad))
+* **internal:** codegen related update ([#15](https://github.com/dackerman/demostore-go/issues/15)) ([705e4b7](https://github.com/dackerman/demostore-go/commit/705e4b7264ef6da3addc4f129e12c979115bef51))
+* refactor client tests ([#19](https://github.com/dackerman/demostore-go/issues/19)) ([05d5814](https://github.com/dackerman/demostore-go/commit/05d5814b02a81fa57da8c885aae96b4ea033aded))
+
 ## 0.1.0-alpha.1 (2024-12-06)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/dackerman/demostore-go/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
