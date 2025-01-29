@@ -45,10 +45,13 @@ import (
 	"fmt"
 
 	"github.com/dackerman/demostore-go"
+	"github.com/dackerman/demostore-go/option"
 )
 
 func main() {
-	client := dackermanstore.NewClient()
+	client := dackermanstore.NewClient(
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"), // defaults to os.LookupEnv("DEMOSTORE_API_KEY")
+	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),

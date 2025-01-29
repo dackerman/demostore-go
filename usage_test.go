@@ -22,6 +22,7 @@ func TestUsage(t *testing.T) {
 	}
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
 		Description: dackermanstore.F("description"),
