@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/dackerman/demostore-go/internal/apijson"
-	"github.com/dackerman/demostore-go/internal/param"
-	"github.com/dackerman/demostore-go/internal/requestconfig"
-	"github.com/dackerman/demostore-go/option"
+	"github.com/stainless-sdks/dackerman-store-go/internal/apijson"
+	"github.com/stainless-sdks/dackerman-store-go/internal/param"
+	"github.com/stainless-sdks/dackerman-store-go/internal/requestconfig"
+	"github.com/stainless-sdks/dackerman-store-go/option"
 )
 
 // ProductVariantService contains methods and other services that help with
