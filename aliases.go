@@ -3,7 +3,7 @@
 package dackermanstore
 
 import (
-	"github.com/dackerman/demostore-go/internal/apierror"
+	"github.com/stainless-sdks/dackerman-store-go/internal/apierror"
 )
 
 type Error = apierror.Error

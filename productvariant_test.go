@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go"
-	"github.com/dackerman/demostore-go/internal/testutil"
-	"github.com/dackerman/demostore-go/option"
+	"github.com/stainless-sdks/dackerman-store-go"
+	"github.com/stainless-sdks/dackerman-store-go/internal/testutil"
+	"github.com/stainless-sdks/dackerman-store-go/option"
 )
 
 func TestProductVariantNew(t *testing.T) {

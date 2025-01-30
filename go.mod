@@ -1,4 +1,4 @@
-module github.com/dackerman/demostore-go
+module github.com/stainless-sdks/dackerman-store-go
 
 go 1.21
 
