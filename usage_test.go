@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/stainless-sdks/dackerman-store-go"
-	"github.com/stainless-sdks/dackerman-store-go/internal/testutil"
-	"github.com/stainless-sdks/dackerman-store-go/option"
+	"github.com/dackerman/demostore-go"
+	"github.com/dackerman/demostore-go/internal/testutil"
+	"github.com/dackerman/demostore-go/option"
 )
 
 func TestUsage(t *testing.T) {

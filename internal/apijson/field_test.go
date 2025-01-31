@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/dackerman-store-go/internal/param"
+	"github.com/dackerman/demostore-go/internal/param"
 )
 
 type Struct struct {

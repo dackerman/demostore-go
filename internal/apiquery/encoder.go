@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/stainless-sdks/dackerman-store-go/internal/param"
+	"github.com/dackerman/demostore-go/internal/param"
 )
 
 var encoders sync.Map // map[reflect.Type]encoderFunc
