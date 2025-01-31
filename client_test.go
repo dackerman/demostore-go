@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/stainless-sdks/dackerman-store-go"
-	"github.com/stainless-sdks/dackerman-store-go/internal"
-	"github.com/stainless-sdks/dackerman-store-go/option"
+	"github.com/dackerman/demostore-go"
+	"github.com/dackerman/demostore-go/internal"
+	"github.com/dackerman/demostore-go/option"
 )
 
 type closureTransport struct {

@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/stainless-sdks/dackerman-store-go/internal/requestconfig"
-	"github.com/stainless-sdks/dackerman-store-go/option"
+	"github.com/dackerman/demostore-go/internal/requestconfig"
+	"github.com/dackerman/demostore-go/option"
 )
 
 // Client creates a struct with services and top level methods that help with

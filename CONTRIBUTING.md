@@ -41,7 +41,7 @@ To use a local version of this library from source in another project, edit the 
 directive. This can be done through the CLI with the following:
 
 ```sh
-$ go mod edit -replace github.com/stainless-sdks/dackerman-store-go=/path/to/dackerman-store-go
+$ go mod edit -replace github.com/dackerman/demostore-go=/path/to/demostore-go
 ```
 
 ## Running tests
