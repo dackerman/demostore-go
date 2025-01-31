@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0 (2025-01-31)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/dackerman/demostore-go/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** update via SDK Studio ([a87393c](https://github.com/dackerman/demostore-go/commit/a87393cac33b6c826c7f5d8c14854593841e2211))
+* **api:** update via SDK Studio ([#26](https://github.com/dackerman/demostore-go/issues/26)) ([5a524de](https://github.com/dackerman/demostore-go/commit/5a524de6d910f00ffb85598919057e3b3012765d))
+
+
+### Chores
+
+* go live ([#28](https://github.com/dackerman/demostore-go/issues/28)) ([0fb6e1f](https://github.com/dackerman/demostore-go/commit/0fb6e1ffa411c61a8adc92155c1ac9dd9623e8f5))
+
 ## 0.1.0 (2025-01-29)
 
 Full Changelog: [v0.1.0-alpha.2...v0.1.0](https://github.com/dackerman/demostore-go/compare/v0.1.0-alpha.2...v0.1.0)
