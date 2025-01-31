@@ -1,6 +1,6 @@
 # Stainless Store Go API Library
 
-<a href="https://pkg.go.dev/github.com/stainless-sdks/dackerman-store-go"><img src="https://pkg.go.dev/badge/github.com/stainless-sdks/dackerman-store-go.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/dackerman/demostore-go"><img src="https://pkg.go.dev/badge/github.com/dackerman/demostore-go.svg" alt="Go Reference"></a>
 
 The Stainless Store Go library provides convenient access to [the Stainless Store REST
 API](https://docs.dackerman-store.com) from applications written in Go. The full API of this library can be found in [api.md](api.md).
@@ -9,17 +9,25 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Installation
 
+<!-- x-release-please-start-version -->
+
 ```go
 import (
-	"github.com/stainless-sdks/dackerman-store-go" // imported as dackermanstore
+	"github.com/dackerman/demostore-go" // imported as dackermanstore
 )
 ```
 
+<!-- x-release-please-end -->
+
 Or to pin the version:
 
+<!-- x-release-please-start-version -->
+
 ```sh
-go get -u 'github.com/stainless-sdks/dackerman-store-go@v0.1.0'
+go get -u 'github.com/dackerman/demostore-go@v0.1.0'
 ```
+
+<!-- x-release-please-end -->
 
 ## Requirements
 
@@ -36,8 +44,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/stainless-sdks/dackerman-store-go"
-	"github.com/stainless-sdks/dackerman-store-go/option"
+	"github.com/dackerman/demostore-go"
+	"github.com/dackerman/demostore-go/option"
 )
 
 func main() {
@@ -150,7 +158,7 @@ client.Products.New(context.TODO(), ...,
 )
 ```
 
-See the [full list of request options](https://pkg.go.dev/github.com/stainless-sdks/dackerman-store-go/option).
+See the [full list of request options](https://pkg.go.dev/github.com/dackerman/demostore-go/option).
 
 ### Pagination
 
@@ -349,7 +357,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/dackerman-store-go/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/dackerman/demostore-go/issues) with questions, bugs, or suggestions.
 
 ## Contributing
 
