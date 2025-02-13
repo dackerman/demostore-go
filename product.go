@@ -142,8 +142,9 @@ type ProductNewParams struct {
 	Description param.Field[string] `json:"description,required"`
 	ImageURL    param.Field[string] `json:"image_url,required"`
 	// The name of the product
-	Name            param.Field[string] `json:"name,required"`
-	Price           param.Field[int64]  `json:"price,required"`
+	Name  param.Field[string] `json:"name,required"`
+	Price param.Field[int64]  `json:"price,required"`
+	// An extra long description of the product
 	LongDescription param.Field[string] `json:"long_description"`
 }
 
@@ -155,8 +156,9 @@ type ProductUpdateParams struct {
 	Description param.Field[string] `json:"description,required"`
 	ImageURL    param.Field[string] `json:"image_url,required"`
 	// The name of the product
-	Name            param.Field[string] `json:"name,required"`
-	Price           param.Field[int64]  `json:"price,required"`
+	Name  param.Field[string] `json:"name,required"`
+	Price param.Field[int64]  `json:"price,required"`
+	// An extra long description of the product
 	LongDescription param.Field[string] `json:"long_description"`
 }
 
