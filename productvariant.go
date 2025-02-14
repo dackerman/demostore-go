@@ -112,6 +112,7 @@ type ProductVariant struct {
 	Price     int64              `json:"price,required"`
 	ProductID string             `json:"product_id,required"`
 	VariantID string             `json:"variant_id,required"`
+	Type      ProductVariantType `json:"type"`
 	JSON      productVariantJSON `json:"-"`
 }
 
@@ -122,6 +123,7 @@ type productVariantJSON struct {
 	Price       apijson.Field
 	ProductID   apijson.Field
 	VariantID   apijson.Field
+	Type        apijson.Field
 	raw         string
 	ExtraFields map[string]apijson.Field
 }
@@ -132,6 +134,21 @@ func (r *ProductVariant) UnmarshalJSON(data []byte) (err error) {
 
 func (r productVariantJSON) RawJSON() string {
 	return r.raw
+}
+
+type ProductVariantType string
+
+const (
+	ProductVariantTypeBig   ProductVariantType = "big"
+	ProductVariantTypeSmall ProductVariantType = "small"
+)
+
+func (r ProductVariantType) IsKnown() bool {
+	switch r {
+	case ProductVariantTypeBig, ProductVariantTypeSmall:
+		return true
+	}
+	return false
 }
 
 type ProductVariantDeleteResponse struct {
@@ -159,22 +176,54 @@ type ProductVariantNewParams struct {
 	// URL of the image to display for the variant
 	ImageURL param.Field[string] `json:"image_url,required"`
 	// The name of the product
-	Name  param.Field[string] `json:"name,required"`
-	Price param.Field[int64]  `json:"price,required"`
+	Name  param.Field[string]                      `json:"name,required"`
+	Price param.Field[int64]                       `json:"price,required"`
+	Type  param.Field[ProductVariantNewParamsType] `json:"type"`
 }
 
 func (r ProductVariantNewParams) MarshalJSON() (data []byte, err error) {
 	return apijson.MarshalRoot(r)
 }
 
+type ProductVariantNewParamsType string
+
+const (
+	ProductVariantNewParamsTypeBig   ProductVariantNewParamsType = "big"
+	ProductVariantNewParamsTypeSmall ProductVariantNewParamsType = "small"
+)
+
+func (r ProductVariantNewParamsType) IsKnown() bool {
+	switch r {
+	case ProductVariantNewParamsTypeBig, ProductVariantNewParamsTypeSmall:
+		return true
+	}
+	return false
+}
+
 type ProductVariantUpdateParams struct {
 	// URL of the image to display for the variant
 	ImageURL param.Field[string] `json:"image_url,required"`
 	// The name of the product
-	Name  param.Field[string] `json:"name,required"`
-	Price param.Field[int64]  `json:"price,required"`
+	Name  param.Field[string]                         `json:"name,required"`
+	Price param.Field[int64]                          `json:"price,required"`
+	Type  param.Field[ProductVariantUpdateParamsType] `json:"type"`
 }
 
 func (r ProductVariantUpdateParams) MarshalJSON() (data []byte, err error) {
 	return apijson.MarshalRoot(r)
+}
+
+type ProductVariantUpdateParamsType string
+
+const (
+	ProductVariantUpdateParamsTypeBig   ProductVariantUpdateParamsType = "big"
+	ProductVariantUpdateParamsTypeSmall ProductVariantUpdateParamsType = "small"
+)
+
+func (r ProductVariantUpdateParamsType) IsKnown() bool {
+	switch r {
+	case ProductVariantUpdateParamsTypeBig, ProductVariantUpdateParamsTypeSmall:
+		return true
+	}
+	return false
 }
