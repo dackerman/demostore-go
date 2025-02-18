@@ -13,7 +13,7 @@ import (
 	"github.com/dackerman/demostore-go/option"
 )
 
-func TestProductVariantNewWithOptionalParams(t *testing.T) {
+func TestProductVariantNew(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -32,7 +32,6 @@ func TestProductVariantNewWithOptionalParams(t *testing.T) {
 			ImageURL: dackermanstore.F("image_url"),
 			Name:     dackermanstore.F("name"),
 			Price:    dackermanstore.F(int64(0)),
-			Type:     dackermanstore.F(dackermanstore.ProductVariantNewParamsTypeBig),
 		},
 	)
 	if err != nil {
@@ -70,7 +69,7 @@ func TestProductVariantGet(t *testing.T) {
 	}
 }
 
-func TestProductVariantUpdateWithOptionalParams(t *testing.T) {
+func TestProductVariantUpdate(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -90,7 +89,6 @@ func TestProductVariantUpdateWithOptionalParams(t *testing.T) {
 			ImageURL: dackermanstore.F("image_url"),
 			Name:     dackermanstore.F("name"),
 			Price:    dackermanstore.F(int64(0)),
-			Type:     dackermanstore.F(dackermanstore.ProductVariantUpdateParamsTypeBig),
 		},
 	)
 	if err != nil {
