@@ -7,8 +7,10 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 
 	"github.com/dackerman/demostore-go/internal/apijson"
+	"github.com/dackerman/demostore-go/internal/apiquery"
 	"github.com/dackerman/demostore-go/internal/param"
 	"github.com/dackerman/demostore-go/internal/requestconfig"
 	"github.com/dackerman/demostore-go/option"
@@ -68,10 +70,10 @@ func (r *ProductService) Update(ctx context.Context, productID string, body Prod
 }
 
 // Read Products
-func (r *ProductService) List(ctx context.Context, opts ...option.RequestOption) (res *[]Product, err error) {
+func (r *ProductService) List(ctx context.Context, query ProductListParams, opts ...option.RequestOption) (res *ProductListResponse, err error) {
 	opts = append(r.Options[:], opts...)
 	path := "products"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
 	return
 }
 
@@ -116,6 +118,29 @@ func (r productJSON) RawJSON() string {
 	return r.raw
 }
 
+type ProductListResponse struct {
+	Data []Product               `json:"data,required"`
+	Next int64                   `json:"next,required,nullable"`
+	JSON productListResponseJSON `json:"-"`
+}
+
+// productListResponseJSON contains the JSON metadata for the struct
+// [ProductListResponse]
+type productListResponseJSON struct {
+	Data        apijson.Field
+	Next        apijson.Field
+	raw         string
+	ExtraFields map[string]apijson.Field
+}
+
+func (r *ProductListResponse) UnmarshalJSON(data []byte) (err error) {
+	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r productListResponseJSON) RawJSON() string {
+	return r.raw
+}
+
 type ProductDeleteResponse struct {
 	Success bool                      `json:"success,required"`
 	JSON    productDeleteResponseJSON `json:"-"`
@@ -157,4 +182,17 @@ type ProductUpdateParams struct {
 
 func (r ProductUpdateParams) MarshalJSON() (data []byte, err error) {
 	return apijson.MarshalRoot(r)
+}
+
+type ProductListParams struct {
+	Limit param.Field[int64] `query:"limit"`
+	Skip  param.Field[int64] `query:"skip"`
+}
+
+// URLQuery serializes [ProductListParams]'s query parameters as `url.Values`.
+func (r ProductListParams) URLQuery() (v url.Values) {
+	return apiquery.MarshalWithSettings(r, apiquery.QuerySettings{
+		ArrayFormat:  apiquery.ArrayQueryFormatComma,
+		NestedFormat: apiquery.NestedQueryFormatBrackets,
+	})
 }
