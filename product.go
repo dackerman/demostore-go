@@ -14,6 +14,7 @@ import (
 	"github.com/dackerman/demostore-go/internal/param"
 	"github.com/dackerman/demostore-go/internal/requestconfig"
 	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/packages/pagination"
 )
 
 // ProductService contains methods and other services that help with interacting
@@ -70,11 +71,26 @@ func (r *ProductService) Update(ctx context.Context, productID string, body Prod
 }
 
 // Read Products
-func (r *ProductService) List(ctx context.Context, query ProductListParams, opts ...option.RequestOption) (res *ProductListResponse, err error) {
+func (r *ProductService) List(ctx context.Context, query ProductListParams, opts ...option.RequestOption) (res *pagination.OffsetPagination[Product], err error) {
+	var raw *http.Response
 	opts = append(r.Options[:], opts...)
+	opts = append([]option.RequestOption{option.WithResponseInto(&raw)}, opts...)
 	path := "products"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, query, &res, opts...)
-	return
+	cfg, err := requestconfig.NewRequestConfig(ctx, http.MethodGet, path, query, &res, opts...)
+	if err != nil {
+		return nil, err
+	}
+	err = cfg.Execute()
+	if err != nil {
+		return nil, err
+	}
+	res.SetPageConfig(cfg, raw)
+	return res, nil
+}
+
+// Read Products
+func (r *ProductService) ListAutoPaging(ctx context.Context, query ProductListParams, opts ...option.RequestOption) *pagination.OffsetPaginationAutoPager[Product] {
+	return pagination.NewOffsetPaginationAutoPager(r.List(ctx, query, opts...))
 }
 
 // Delete Product
@@ -115,29 +131,6 @@ func (r *Product) UnmarshalJSON(data []byte) (err error) {
 }
 
 func (r productJSON) RawJSON() string {
-	return r.raw
-}
-
-type ProductListResponse struct {
-	Data []Product               `json:"data,required"`
-	Next int64                   `json:"next,required,nullable"`
-	JSON productListResponseJSON `json:"-"`
-}
-
-// productListResponseJSON contains the JSON metadata for the struct
-// [ProductListResponse]
-type productListResponseJSON struct {
-	Data        apijson.Field
-	Next        apijson.Field
-	raw         string
-	ExtraFields map[string]apijson.Field
-}
-
-func (r *ProductListResponse) UnmarshalJSON(data []byte) (err error) {
-	return apijson.UnmarshalRoot(data, r)
-}
-
-func (r productListResponseJSON) RawJSON() string {
 	return r.raw
 }
 
