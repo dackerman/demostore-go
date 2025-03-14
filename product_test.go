@@ -93,7 +93,7 @@ func TestProductUpdate(t *testing.T) {
 	}
 }
 
-func TestProductList(t *testing.T) {
+func TestProductListWithOptionalParams(t *testing.T) {
 	baseURL := "http://localhost:4010"
 	if envURL, ok := os.LookupEnv("TEST_API_BASE_URL"); ok {
 		baseURL = envURL
@@ -105,7 +105,10 @@ func TestProductList(t *testing.T) {
 		option.WithBaseURL(baseURL),
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 	)
-	_, err := client.Products.List(context.TODO())
+	_, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{
+		Limit: dackermanstore.F(int64(0)),
+		Skip:  dackermanstore.F(int64(0)),
+	})
 	if err != nil {
 		var apierr *dackermanstore.Error
 		if errors.As(err, &apierr) {
