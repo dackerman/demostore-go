@@ -105,7 +105,7 @@ func (r *ProductVariantService) Delete(ctx context.Context, productID string, va
 	return
 }
 
-// Represents a ProductVariant
+// Represents a ProductVariant record
 type ProductVariant struct {
 	ImageURL  string             `json:"image_url,required"`
 	Name      string             `json:"name,required"`
@@ -156,7 +156,6 @@ func (r productVariantDeleteResponseJSON) RawJSON() string {
 }
 
 type ProductVariantNewParams struct {
-	// URL of the image to display for the variant
 	ImageURL param.Field[string] `json:"image_url,required"`
 	Name     param.Field[string] `json:"name,required"`
 	Price    param.Field[int64]  `json:"price,required"`
@@ -167,7 +166,6 @@ func (r ProductVariantNewParams) MarshalJSON() (data []byte, err error) {
 }
 
 type ProductVariantUpdateParams struct {
-	// URL of the image to display for the variant
 	ImageURL param.Field[string] `json:"image_url,required"`
 	Name     param.Field[string] `json:"name,required"`
 	Price    param.Field[int64]  `json:"price,required"`
