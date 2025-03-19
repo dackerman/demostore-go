@@ -110,7 +110,7 @@ type Product struct {
 	Description string `json:"description,required"`
 	ImageURL    string `json:"image_url,required"`
 	Name        string `json:"name,required"`
-	// Price
+	// Price.
 	Price     int64       `json:"price,required"`
 	ProductID string      `json:"product_id,required"`
 	JSON      productJSON `json:"-"`
