@@ -105,7 +105,7 @@ func (r *ProductVariantService) Delete(ctx context.Context, productID string, va
 	return
 }
 
-// Represents a ProductVariant.
+// Represents a ProductVariant
 type ProductVariant struct {
 	ImageURL  string             `json:"image_url,required"`
 	Name      string             `json:"name,required"`
