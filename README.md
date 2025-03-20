@@ -5,7 +5,7 @@
 The Stainless Store Go library provides convenient access to [the Stainless Store REST
 API](https://docs.dackerman-store.com) from applications written in Go. The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
@@ -24,7 +24,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/dackerman/demostore-go@v0.2.0'
+go get -u 'github.com/dackerman/demostore-go@v0.3.0'
 ```
 
 <!-- x-release-please-end -->
@@ -166,8 +166,33 @@ This library provides some conveniences for working with paginated list endpoint
 
 You can use `.ListAutoPaging()` methods to iterate through items across all pages:
 
+```go
+iter := client.Products.ListAutoPaging(context.TODO(), dackermanstore.ProductListParams{})
+// Automatically fetches more pages as needed.
+for iter.Next() {
+	product := iter.Current()
+	fmt.Printf("%+v\n", product)
+}
+if err := iter.Err(); err != nil {
+	panic(err.Error())
+}
+```
+
 Or you can use simple `.List()` methods to fetch a single page and receive a standard response object
 with additional helper methods like `.GetNextPage()`, e.g.:
+
+```go
+page, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{})
+for page != nil {
+	for _, product := range page.Data {
+		fmt.Printf("%+v\n", product)
+	}
+	page, err = page.GetNextPage()
+}
+if err != nil {
+	panic(err.Error())
+}
+```
 
 ### Errors
 
@@ -260,6 +285,33 @@ client.Products.New(
 	},
 	option.WithMaxRetries(5),
 )
+```
+
+### Accessing raw response data (e.g. response headers)
+
+You can access the raw HTTP response data by using the `option.WithResponseInto()` request option. This is useful when
+you need to examine response headers, status codes, or other details.
+
+```go
+// Create a variable to store the HTTP response
+var response *http.Response
+product, err := client.Products.New(
+	context.TODO(),
+	dackermanstore.ProductNewParams{
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
+	},
+	option.WithResponseInto(&response),
+)
+if err != nil {
+	// handle error
+}
+fmt.Printf("%+v\n", product)
+
+fmt.Printf("Status Code: %d\n", response.StatusCode)
+fmt.Printf("Headers: %+#v\n", response.Header)
 ```
 
 ### Making custom/undocumented requests

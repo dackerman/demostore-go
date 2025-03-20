@@ -7,11 +7,14 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 
 	"github.com/dackerman/demostore-go/internal/apijson"
+	"github.com/dackerman/demostore-go/internal/apiquery"
 	"github.com/dackerman/demostore-go/internal/param"
 	"github.com/dackerman/demostore-go/internal/requestconfig"
 	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/packages/pagination"
 )
 
 // ProductService contains methods and other services that help with interacting
@@ -68,11 +71,26 @@ func (r *ProductService) Update(ctx context.Context, productID string, body Prod
 }
 
 // Read Products
-func (r *ProductService) List(ctx context.Context, opts ...option.RequestOption) (res *[]Product, err error) {
+func (r *ProductService) List(ctx context.Context, query ProductListParams, opts ...option.RequestOption) (res *pagination.OffsetPagination[Product], err error) {
+	var raw *http.Response
 	opts = append(r.Options[:], opts...)
+	opts = append([]option.RequestOption{option.WithResponseInto(&raw)}, opts...)
 	path := "products"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
-	return
+	cfg, err := requestconfig.NewRequestConfig(ctx, http.MethodGet, path, query, &res, opts...)
+	if err != nil {
+		return nil, err
+	}
+	err = cfg.Execute()
+	if err != nil {
+		return nil, err
+	}
+	res.SetPageConfig(cfg, raw)
+	return res, nil
+}
+
+// Read Products
+func (r *ProductService) ListAutoPaging(ctx context.Context, query ProductListParams, opts ...option.RequestOption) *pagination.OffsetPaginationAutoPager[Product] {
+	return pagination.NewOffsetPaginationAutoPager(r.List(ctx, query, opts...))
 }
 
 // Delete Product
@@ -91,8 +109,8 @@ func (r *ProductService) Delete(ctx context.Context, productID string, opts ...o
 type Product struct {
 	Description string `json:"description,required"`
 	ImageURL    string `json:"image_url,required"`
-	// The name of the Product
-	Name      string      `json:"name,required"`
+	Name        string `json:"name,required"`
+	// Price.
 	Price     int64       `json:"price,required"`
 	ProductID string      `json:"product_id,required"`
 	JSON      productJSON `json:"-"`
@@ -139,11 +157,10 @@ func (r productDeleteResponseJSON) RawJSON() string {
 }
 
 type ProductNewParams struct {
-	Description     param.Field[string] `json:"description,required"`
-	ImageURL        param.Field[string] `json:"image_url,required"`
-	Name            param.Field[string] `json:"name,required"`
-	Price           param.Field[int64]  `json:"price,required"`
-	LongDescription param.Field[string] `json:"long_description"`
+	Description param.Field[string] `json:"description,required"`
+	ImageURL    param.Field[string] `json:"image_url,required"`
+	Name        param.Field[string] `json:"name,required"`
+	Price       param.Field[int64]  `json:"price,required"`
 }
 
 func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
@@ -151,13 +168,25 @@ func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
 }
 
 type ProductUpdateParams struct {
-	Description     param.Field[string] `json:"description,required"`
-	ImageURL        param.Field[string] `json:"image_url,required"`
-	Name            param.Field[string] `json:"name,required"`
-	Price           param.Field[int64]  `json:"price,required"`
-	LongDescription param.Field[string] `json:"long_description"`
+	Description param.Field[string] `json:"description,required"`
+	ImageURL    param.Field[string] `json:"image_url,required"`
+	Name        param.Field[string] `json:"name,required"`
+	Price       param.Field[int64]  `json:"price,required"`
 }
 
 func (r ProductUpdateParams) MarshalJSON() (data []byte, err error) {
 	return apijson.MarshalRoot(r)
+}
+
+type ProductListParams struct {
+	Limit param.Field[int64] `query:"limit"`
+	Skip  param.Field[int64] `query:"skip"`
+}
+
+// URLQuery serializes [ProductListParams]'s query parameters as `url.Values`.
+func (r ProductListParams) URLQuery() (v url.Values) {
+	return apiquery.MarshalWithSettings(r, apiquery.QuerySettings{
+		ArrayFormat:  apiquery.ArrayQueryFormatComma,
+		NestedFormat: apiquery.NestedQueryFormatBrackets,
+	})
 }
