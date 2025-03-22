@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.3.0 (2025-03-20)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/dackerman/demostore-go/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* add SKIP_BREW env var to ./scripts/bootstrap ([#45](https://github.com/dackerman/demostore-go/issues/45)) ([a364e4d](https://github.com/dackerman/demostore-go/commit/a364e4dd9011caafa2ef4cc1f04214e3787e5e1d))
+* **api:** update via SDK Studio ([#37](https://github.com/dackerman/demostore-go/issues/37)) ([cc1e8f4](https://github.com/dackerman/demostore-go/commit/cc1e8f4b3aba18165b5d41856e2097245a2de57e))
+* **api:** update via SDK Studio ([#38](https://github.com/dackerman/demostore-go/issues/38)) ([7650dc4](https://github.com/dackerman/demostore-go/commit/7650dc4dfa26c4c523a97d13f60c7be653c4a523))
+* **api:** update via SDK Studio ([#39](https://github.com/dackerman/demostore-go/issues/39)) ([7f17fd0](https://github.com/dackerman/demostore-go/commit/7f17fd0269e7a85ea4633de7ae7ef6657f8f5595))
+* **api:** update via SDK Studio ([#41](https://github.com/dackerman/demostore-go/issues/41)) ([bb1b939](https://github.com/dackerman/demostore-go/commit/bb1b93920c915a69101ec58ebe4842f32bac35e6))
+* **api:** update via SDK Studio ([#50](https://github.com/dackerman/demostore-go/issues/50)) ([cde8e7d](https://github.com/dackerman/demostore-go/commit/cde8e7dfe936406c08119e804d5dcc94639cd977))
+* **api:** update via SDK Studio ([#51](https://github.com/dackerman/demostore-go/issues/51)) ([a495ac5](https://github.com/dackerman/demostore-go/commit/a495ac5cd0f24c1ba2e394aabbd8dc4bfa7b195f))
+* **api:** update via SDK Studio ([#52](https://github.com/dackerman/demostore-go/issues/52)) ([1cb8915](https://github.com/dackerman/demostore-go/commit/1cb891512d9d4a4a12a987ab26a00e84688066a5))
+* **api:** update via SDK Studio ([#53](https://github.com/dackerman/demostore-go/issues/53)) ([57a545a](https://github.com/dackerman/demostore-go/commit/57a545a0ba6df1c962c610b3cf9d74b822113607))
+* **api:** update via SDK Studio ([#54](https://github.com/dackerman/demostore-go/issues/54)) ([15d3e03](https://github.com/dackerman/demostore-go/commit/15d3e03621d42851fba9ebe578a76d6f47ddb4c5))
+* **api:** update via SDK Studio ([#55](https://github.com/dackerman/demostore-go/issues/55)) ([9a71262](https://github.com/dackerman/demostore-go/commit/9a71262cf863aba897ec1b1eef55088ba1208e6d))
+* **client:** accept RFC6838 JSON content types ([#46](https://github.com/dackerman/demostore-go/issues/46)) ([24eb0b5](https://github.com/dackerman/demostore-go/commit/24eb0b5fb8889ec199223bdfada31df76eca7abb))
+* **client:** allow custom baseurls without trailing slash ([#44](https://github.com/dackerman/demostore-go/issues/44)) ([82d7a06](https://github.com/dackerman/demostore-go/commit/82d7a062c3004f4a73df020e838ddcfd67dbe114))
+* **client:** improve default client options support ([#48](https://github.com/dackerman/demostore-go/issues/48)) ([a440add](https://github.com/dackerman/demostore-go/commit/a440adddf7598bc3191673e1696b301c754fda5c))
+* **client:** send `X-Stainless-Timeout` header ([#33](https://github.com/dackerman/demostore-go/issues/33)) ([4d8b59a](https://github.com/dackerman/demostore-go/commit/4d8b59a14edd687f4325e302cc0b975c933defda))
+
+
+### Bug Fixes
+
+* **client:** don't truncate manually specified filenames ([#40](https://github.com/dackerman/demostore-go/issues/40)) ([a3722e4](https://github.com/dackerman/demostore-go/commit/a3722e4ce5329de17e5862591da45b3b381692fa))
+* do not call path.Base on ContentType ([#36](https://github.com/dackerman/demostore-go/issues/36)) ([6f3f7a9](https://github.com/dackerman/demostore-go/commit/6f3f7a97b80df48ffe623254e88d18eaf8db5065))
+* fix early cancel when RequestTimeout is provided for streaming requests ([#35](https://github.com/dackerman/demostore-go/issues/35)) ([40aaa9a](https://github.com/dackerman/demostore-go/commit/40aaa9ac34d6656ff55103fbd95418f5c7bab46e))
+* fix unicode encoding for json ([#30](https://github.com/dackerman/demostore-go/issues/30)) ([0840c6c](https://github.com/dackerman/demostore-go/commit/0840c6c9eae3d3571e91daded8b6bb88d9899005))
+
+
+### Chores
+
+* add UnionUnmarshaler for responses that are interfaces ([#34](https://github.com/dackerman/demostore-go/issues/34)) ([5d2b7df](https://github.com/dackerman/demostore-go/commit/5d2b7dfa877c337757d08283f528502f59bd271a))
+* **internal:** codegen related update ([#42](https://github.com/dackerman/demostore-go/issues/42)) ([2b3e388](https://github.com/dackerman/demostore-go/commit/2b3e3884a55afb848207fe93dad7a3927fa97962))
+* **internal:** remove extra empty newlines ([#49](https://github.com/dackerman/demostore-go/issues/49)) ([9ad7a7f](https://github.com/dackerman/demostore-go/commit/9ad7a7f8bb1a5602f0702d271112d7ebaf0d310b))
+
+
+### Documentation
+
+* document raw responses ([#32](https://github.com/dackerman/demostore-go/issues/32)) ([f8073c7](https://github.com/dackerman/demostore-go/commit/f8073c78b7cf69699f56c6cc288625879ae0932b))
+* update URLs from stainlessapi.com to stainless.com ([#43](https://github.com/dackerman/demostore-go/issues/43)) ([3ca4880](https://github.com/dackerman/demostore-go/commit/3ca48805b8c1d6c3ab9af71a2a8d672c70ac230a))
+
+
+### Refactors
+
+* tidy up dependencies ([#47](https://github.com/dackerman/demostore-go/issues/47)) ([c1b4db2](https://github.com/dackerman/demostore-go/commit/c1b4db23deb018b7e58c9816c6c92ddfeab46e58))
+
 ## 0.2.0 (2025-01-31)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/dackerman/demostore-go/compare/v0.1.0...v0.2.0)
