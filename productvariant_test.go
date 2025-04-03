@@ -24,11 +24,13 @@ func TestProductVariantNew(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 	)
 	_, err := client.Products.Variants.New(
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductVariantNewParams{
+			OrgID:    dackermanstore.F("org_id"),
 			ImageURL: dackermanstore.F("image_url"),
 			Name:     dackermanstore.F("name"),
 			Price:    dackermanstore.F(int64(0)),
@@ -54,11 +56,15 @@ func TestProductVariantGet(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 	)
 	_, err := client.Products.Variants.Get(
 		context.TODO(),
 		"product_id",
 		"variant_id",
+		dackermanstore.ProductVariantGetParams{
+			OrgID: dackermanstore.F("org_id"),
+		},
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -80,12 +86,14 @@ func TestProductVariantUpdate(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 	)
 	_, err := client.Products.Variants.Update(
 		context.TODO(),
 		"product_id",
 		"variant_id",
 		dackermanstore.ProductVariantUpdateParams{
+			OrgID:    dackermanstore.F("org_id"),
 			ImageURL: dackermanstore.F("image_url"),
 			Name:     dackermanstore.F("name"),
 			Price:    dackermanstore.F(int64(0)),
@@ -111,8 +119,15 @@ func TestProductVariantList(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 	)
-	_, err := client.Products.Variants.List(context.TODO(), "product_id")
+	_, err := client.Products.Variants.List(
+		context.TODO(),
+		"product_id",
+		dackermanstore.ProductVariantListParams{
+			OrgID: dackermanstore.F("org_id"),
+		},
+	)
 	if err != nil {
 		var apierr *dackermanstore.Error
 		if errors.As(err, &apierr) {
@@ -133,11 +148,15 @@ func TestProductVariantDelete(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 	)
 	_, err := client.Products.Variants.Delete(
 		context.TODO(),
 		"product_id",
 		"variant_id",
+		dackermanstore.ProductVariantDeleteParams{
+			OrgID: dackermanstore.F("org_id"),
+		},
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error

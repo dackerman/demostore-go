@@ -241,3 +241,14 @@ func WithAuthToken(value string) RequestOption {
 		return nil
 	})
 }
+
+// WithOrgID returns a RequestOption that sets the client setting "org_id".
+func WithOrgID(value string) RequestOption {
+	return requestconfig.PreRequestOptionFunc(func(r *requestconfig.RequestConfig) error {
+		if value == "" {
+			return fmt.Errorf("default param cannot be empty string")
+		}
+		r.OrgID = &value
+		return nil
+	})
+}
