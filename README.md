@@ -51,8 +51,10 @@ import (
 func main() {
 	client := dackermanstore.NewClient(
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"), // defaults to os.LookupEnv("DEMOSTORE_API_KEY")
+		option.WithOrgID("my_org"),                                   // defaults to os.LookupEnv("DEMOSTORE_ORG_ID")
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -167,7 +169,9 @@ This library provides some conveniences for working with paginated list endpoint
 You can use `.ListAutoPaging()` methods to iterate through items across all pages:
 
 ```go
-iter := client.Products.ListAutoPaging(context.TODO(), dackermanstore.ProductListParams{})
+iter := client.Products.ListAutoPaging(context.TODO(), dackermanstore.ProductListParams{
+	OrgID: dackermanstore.F("org_id"),
+})
 // Automatically fetches more pages as needed.
 for iter.Next() {
 	product := iter.Current()
@@ -182,7 +186,9 @@ Or you can use simple `.List()` methods to fetch a single page and receive a sta
 with additional helper methods like `.GetNextPage()`, e.g.:
 
 ```go
-page, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{})
+page, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{
+	OrgID: dackermanstore.F("org_id"),
+})
 for page != nil {
 	for _, product := range page.Data {
 		fmt.Printf("%+v\n", product)
@@ -205,6 +211,7 @@ To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
 _, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
+	OrgID:       dackermanstore.F("org_id"),
 	Description: dackermanstore.F("description"),
 	ImageURL:    dackermanstore.F("image_url"),
 	Name:        dackermanstore.F("name"),
@@ -216,7 +223,7 @@ if err != nil {
 		println(string(apierr.DumpRequest(true)))  // Prints the serialized HTTP request
 		println(string(apierr.DumpResponse(true))) // Prints the serialized HTTP response
 	}
-	panic(err.Error()) // GET "/products": 400 Bad Request { ... }
+	panic(err.Error()) // GET "/orgs/{org_id}/products": 400 Bad Request { ... }
 }
 ```
 
@@ -237,6 +244,7 @@ defer cancel()
 client.Products.New(
 	ctx,
 	dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -278,6 +286,7 @@ client := dackermanstore.NewClient(
 client.Products.New(
 	context.TODO(),
 	dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -298,6 +307,7 @@ var response *http.Response
 product, err := client.Products.New(
 	context.TODO(),
 	dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
