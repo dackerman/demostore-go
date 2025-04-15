@@ -2,8 +2,8 @@
 
 <a href="https://pkg.go.dev/github.com/dackerman/demostore-go"><img src="https://pkg.go.dev/badge/github.com/dackerman/demostore-go.svg" alt="Go Reference"></a>
 
-The Stainless Store Go library provides convenient access to [the Stainless Store REST
-API](https://docs.dackerman-store.com) from applications written in Go. The full API of this library can be found in [api.md](api.md).
+The Stainless Store Go library provides convenient access to the [Stainless Store REST API](https://docs.dackerman-store.com)
+from applications written in Go.
 
 It is generated with [Stainless](https://www.stainless.com/).
 
