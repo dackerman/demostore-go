@@ -23,8 +23,10 @@ func TestUsage(t *testing.T) {
 	client := dackermanstore.NewClient(
 		option.WithBaseURL(baseURL),
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -32,6 +34,7 @@ func TestUsage(t *testing.T) {
 	})
 	if err != nil {
 		t.Error(err)
+		return
 	}
 	t.Logf("%+v\n", product.ProductID)
 }

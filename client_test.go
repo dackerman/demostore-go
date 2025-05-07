@@ -26,6 +26,8 @@ func (t *closureTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 func TestUserAgentHeader(t *testing.T) {
 	var userAgent string
 	client := dackermanstore.NewClient(
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 		option.WithHTTPClient(&http.Client{
 			Transport: &closureTransport{
 				fn: func(req *http.Request) (*http.Response, error) {
@@ -38,6 +40,7 @@ func TestUserAgentHeader(t *testing.T) {
 		}),
 	)
 	client.Products.New(context.Background(), dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -51,6 +54,8 @@ func TestUserAgentHeader(t *testing.T) {
 func TestRetryAfter(t *testing.T) {
 	retryCountHeaders := make([]string, 0)
 	client := dackermanstore.NewClient(
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 		option.WithHTTPClient(&http.Client{
 			Transport: &closureTransport{
 				fn: func(req *http.Request) (*http.Response, error) {
@@ -66,6 +71,7 @@ func TestRetryAfter(t *testing.T) {
 		}),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -89,6 +95,8 @@ func TestRetryAfter(t *testing.T) {
 func TestDeleteRetryCountHeader(t *testing.T) {
 	retryCountHeaders := make([]string, 0)
 	client := dackermanstore.NewClient(
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 		option.WithHTTPClient(&http.Client{
 			Transport: &closureTransport{
 				fn: func(req *http.Request) (*http.Response, error) {
@@ -105,6 +113,7 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		option.WithHeaderDel("X-Stainless-Retry-Count"),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -123,6 +132,8 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 func TestOverwriteRetryCountHeader(t *testing.T) {
 	retryCountHeaders := make([]string, 0)
 	client := dackermanstore.NewClient(
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 		option.WithHTTPClient(&http.Client{
 			Transport: &closureTransport{
 				fn: func(req *http.Request) (*http.Response, error) {
@@ -139,6 +150,7 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		option.WithHeader("X-Stainless-Retry-Count", "42"),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -157,6 +169,8 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 func TestRetryAfterMs(t *testing.T) {
 	attempts := 0
 	client := dackermanstore.NewClient(
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 		option.WithHTTPClient(&http.Client{
 			Transport: &closureTransport{
 				fn: func(req *http.Request) (*http.Response, error) {
@@ -172,6 +186,7 @@ func TestRetryAfterMs(t *testing.T) {
 		}),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -187,6 +202,8 @@ func TestRetryAfterMs(t *testing.T) {
 
 func TestContextCancel(t *testing.T) {
 	client := dackermanstore.NewClient(
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 		option.WithHTTPClient(&http.Client{
 			Transport: &closureTransport{
 				fn: func(req *http.Request) (*http.Response, error) {
@@ -199,6 +216,7 @@ func TestContextCancel(t *testing.T) {
 	cancelCtx, cancel := context.WithCancel(context.Background())
 	cancel()
 	_, err := client.Products.New(cancelCtx, dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -211,6 +229,8 @@ func TestContextCancel(t *testing.T) {
 
 func TestContextCancelDelay(t *testing.T) {
 	client := dackermanstore.NewClient(
+		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+		option.WithOrgID("my_org"),
 		option.WithHTTPClient(&http.Client{
 			Transport: &closureTransport{
 				fn: func(req *http.Request) (*http.Response, error) {
@@ -223,6 +243,7 @@ func TestContextCancelDelay(t *testing.T) {
 	cancelCtx, cancel := context.WithTimeout(context.Background(), 2*time.Millisecond)
 	defer cancel()
 	_, err := client.Products.New(cancelCtx, dackermanstore.ProductNewParams{
+		OrgID:       dackermanstore.F("org_id"),
 		Description: dackermanstore.F("description"),
 		ImageURL:    dackermanstore.F("image_url"),
 		Name:        dackermanstore.F("name"),
@@ -243,6 +264,8 @@ func TestContextDeadline(t *testing.T) {
 
 	go func() {
 		client := dackermanstore.NewClient(
+			option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
+			option.WithOrgID("my_org"),
 			option.WithHTTPClient(&http.Client{
 				Transport: &closureTransport{
 					fn: func(req *http.Request) (*http.Response, error) {
@@ -253,6 +276,7 @@ func TestContextDeadline(t *testing.T) {
 			}),
 		)
 		_, err := client.Products.New(deadlineCtx, dackermanstore.ProductNewParams{
+			OrgID:       dackermanstore.F("org_id"),
 			Description: dackermanstore.F("description"),
 			ImageURL:    dackermanstore.F("image_url"),
 			Name:        dackermanstore.F("name"),

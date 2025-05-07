@@ -46,7 +46,10 @@ func (r *OffsetPagination[T]) GetNextPage() (res *OffsetPagination[T], err error
 	length := int64(len(r.Data))
 
 	if length > 0 && next != 0 {
-		cfg.Apply(option.WithQuery("skip", strconv.FormatInt(next, 10)))
+		err = cfg.Apply(option.WithQuery("skip", strconv.FormatInt(next, 10)))
+		if err != nil {
+			return nil, err
+		}
 	} else {
 		return nil, nil
 	}

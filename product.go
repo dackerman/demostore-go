@@ -39,44 +39,80 @@ func NewProductService(opts ...option.RequestOption) (r *ProductService) {
 }
 
 // Create Product
-func (r *ProductService) New(ctx context.Context, body ProductNewParams, opts ...option.RequestOption) (res *Product, err error) {
+func (r *ProductService) New(ctx context.Context, params ProductNewParams, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
-	path := "products"
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, body, &res, opts...)
+	precfg, err := requestconfig.PreRequestOptions(opts...)
+	if err != nil {
+		return
+	}
+	requestconfig.UseDefaultParam(&params.OrgID, precfg.OrgID)
+	if params.OrgID.Value == "" {
+		err = errors.New("missing required org_id parameter")
+		return
+	}
+	path := fmt.Sprintf("orgs/%s/products", params.OrgID)
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, params, &res, opts...)
 	return
 }
 
 // Read Product
-func (r *ProductService) Get(ctx context.Context, productID string, opts ...option.RequestOption) (res *Product, err error) {
+func (r *ProductService) Get(ctx context.Context, productID string, query ProductGetParams, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
+	precfg, err := requestconfig.PreRequestOptions(opts...)
+	if err != nil {
+		return
+	}
+	requestconfig.UseDefaultParam(&query.OrgID, precfg.OrgID)
+	if query.OrgID.Value == "" {
+		err = errors.New("missing required org_id parameter")
+		return
+	}
 	if productID == "" {
 		err = errors.New("missing required product_id parameter")
 		return
 	}
-	path := fmt.Sprintf("products/%s", productID)
+	path := fmt.Sprintf("orgs/%s/products/%s", query.OrgID, productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
 }
 
 // Update Product
-func (r *ProductService) Update(ctx context.Context, productID string, body ProductUpdateParams, opts ...option.RequestOption) (res *Product, err error) {
+func (r *ProductService) Update(ctx context.Context, productID string, params ProductUpdateParams, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
+	precfg, err := requestconfig.PreRequestOptions(opts...)
+	if err != nil {
+		return
+	}
+	requestconfig.UseDefaultParam(&params.OrgID, precfg.OrgID)
+	if params.OrgID.Value == "" {
+		err = errors.New("missing required org_id parameter")
+		return
+	}
 	if productID == "" {
 		err = errors.New("missing required product_id parameter")
 		return
 	}
-	path := fmt.Sprintf("products/%s", productID)
-	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, body, &res, opts...)
+	path := fmt.Sprintf("orgs/%s/products/%s", params.OrgID, productID)
+	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, params, &res, opts...)
 	return
 }
 
 // Read Products
-func (r *ProductService) List(ctx context.Context, query ProductListParams, opts ...option.RequestOption) (res *pagination.OffsetPagination[Product], err error) {
+func (r *ProductService) List(ctx context.Context, params ProductListParams, opts ...option.RequestOption) (res *pagination.OffsetPagination[Product], err error) {
 	var raw *http.Response
 	opts = append(r.Options[:], opts...)
 	opts = append([]option.RequestOption{option.WithResponseInto(&raw)}, opts...)
-	path := "products"
-	cfg, err := requestconfig.NewRequestConfig(ctx, http.MethodGet, path, query, &res, opts...)
+	precfg, err := requestconfig.PreRequestOptions(opts...)
+	if err != nil {
+		return
+	}
+	requestconfig.UseDefaultParam(&params.OrgID, precfg.OrgID)
+	if params.OrgID.Value == "" {
+		err = errors.New("missing required org_id parameter")
+		return
+	}
+	path := fmt.Sprintf("orgs/%s/products", params.OrgID)
+	cfg, err := requestconfig.NewRequestConfig(ctx, http.MethodGet, path, params, &res, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -89,31 +125,39 @@ func (r *ProductService) List(ctx context.Context, query ProductListParams, opts
 }
 
 // Read Products
-func (r *ProductService) ListAutoPaging(ctx context.Context, query ProductListParams, opts ...option.RequestOption) *pagination.OffsetPaginationAutoPager[Product] {
-	return pagination.NewOffsetPaginationAutoPager(r.List(ctx, query, opts...))
+func (r *ProductService) ListAutoPaging(ctx context.Context, params ProductListParams, opts ...option.RequestOption) *pagination.OffsetPaginationAutoPager[Product] {
+	return pagination.NewOffsetPaginationAutoPager(r.List(ctx, params, opts...))
 }
 
 // Delete Product
-func (r *ProductService) Delete(ctx context.Context, productID string, opts ...option.RequestOption) (res *ProductDeleteResponse, err error) {
+func (r *ProductService) Delete(ctx context.Context, productID string, body ProductDeleteParams, opts ...option.RequestOption) (res *ProductDeleteResponse, err error) {
 	opts = append(r.Options[:], opts...)
+	precfg, err := requestconfig.PreRequestOptions(opts...)
+	if err != nil {
+		return
+	}
+	requestconfig.UseDefaultParam(&body.OrgID, precfg.OrgID)
+	if body.OrgID.Value == "" {
+		err = errors.New("missing required org_id parameter")
+		return
+	}
 	if productID == "" {
 		err = errors.New("missing required product_id parameter")
 		return
 	}
-	path := fmt.Sprintf("products/%s", productID)
+	path := fmt.Sprintf("orgs/%s/products/%s", body.OrgID, productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, nil, &res, opts...)
 	return
 }
 
 // Represents a Product record
 type Product struct {
-	Description string `json:"description,required"`
-	ImageURL    string `json:"image_url,required"`
-	Name        string `json:"name,required"`
-	// Price.
-	Price     int64       `json:"price,required"`
-	ProductID string      `json:"product_id,required"`
-	JSON      productJSON `json:"-"`
+	Description string      `json:"description,required"`
+	ImageURL    string      `json:"image_url,required"`
+	Name        string      `json:"name,required"`
+	Price       int64       `json:"price,required"`
+	ProductID   string      `json:"product_id,required"`
+	JSON        productJSON `json:"-"`
 }
 
 // productJSON contains the JSON metadata for the struct [Product]
@@ -157,6 +201,8 @@ func (r productDeleteResponseJSON) RawJSON() string {
 }
 
 type ProductNewParams struct {
+	// Use [option.WithOrgID] on the client to set a global default for this field.
+	OrgID       param.Field[string] `path:"org_id,required"`
 	Description param.Field[string] `json:"description,required"`
 	ImageURL    param.Field[string] `json:"image_url,required"`
 	Name        param.Field[string] `json:"name,required"`
@@ -167,7 +213,14 @@ func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
 	return apijson.MarshalRoot(r)
 }
 
+type ProductGetParams struct {
+	// Use [option.WithOrgID] on the client to set a global default for this field.
+	OrgID param.Field[string] `path:"org_id,required"`
+}
+
 type ProductUpdateParams struct {
+	// Use [option.WithOrgID] on the client to set a global default for this field.
+	OrgID       param.Field[string] `path:"org_id,required"`
 	Description param.Field[string] `json:"description,required"`
 	ImageURL    param.Field[string] `json:"image_url,required"`
 	Name        param.Field[string] `json:"name,required"`
@@ -179,8 +232,10 @@ func (r ProductUpdateParams) MarshalJSON() (data []byte, err error) {
 }
 
 type ProductListParams struct {
-	Limit param.Field[int64] `query:"limit"`
-	Skip  param.Field[int64] `query:"skip"`
+	// Use [option.WithOrgID] on the client to set a global default for this field.
+	OrgID param.Field[string] `path:"org_id,required"`
+	Limit param.Field[int64]  `query:"limit"`
+	Skip  param.Field[int64]  `query:"skip"`
 }
 
 // URLQuery serializes [ProductListParams]'s query parameters as `url.Values`.
@@ -189,4 +244,9 @@ func (r ProductListParams) URLQuery() (v url.Values) {
 		ArrayFormat:  apiquery.ArrayQueryFormatComma,
 		NestedFormat: apiquery.NestedQueryFormatBrackets,
 	})
+}
+
+type ProductDeleteParams struct {
+	// Use [option.WithOrgID] on the client to set a global default for this field.
+	OrgID param.Field[string] `path:"org_id,required"`
 }
