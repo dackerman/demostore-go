@@ -1,5 +1,44 @@
 # Changelog
 
+## 0.4.0 (2025-05-07)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/dackerman/demostore-go/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** update via SDK Studio ([#64](https://github.com/dackerman/demostore-go/issues/64)) ([a522b77](https://github.com/dackerman/demostore-go/commit/a522b77c4b0f09b5c44f6da229886a6df25cecc0))
+* **client:** add support for reading base URL from environment variable ([3f04088](https://github.com/dackerman/demostore-go/commit/3f04088a9ba88945782152f96426b5813fdfc89a))
+* **client:** support custom http clients ([#65](https://github.com/dackerman/demostore-go/issues/65)) ([c4e224c](https://github.com/dackerman/demostore-go/commit/c4e224c5385f034d2e3ae8156f3b4e4994e1f79a))
+
+
+### Bug Fixes
+
+* **client:** clean up reader resources ([2cbd258](https://github.com/dackerman/demostore-go/commit/2cbd258f4f8ea4a99f04ddb8e861e18f868dad00))
+* **client:** correctly update body in WithJSONSet ([0523be4](https://github.com/dackerman/demostore-go/commit/0523be479ae2306b2bf55ca0e5601ed561e7d39a))
+* **client:** dedup slashes in URL ([#62](https://github.com/dackerman/demostore-go/issues/62)) ([17d8d5d](https://github.com/dackerman/demostore-go/commit/17d8d5d1bdf2b75d7924dc7115d581fde50e03e8))
+* **client:** return error on bad custom url instead of panic ([#63](https://github.com/dackerman/demostore-go/issues/63)) ([46306ee](https://github.com/dackerman/demostore-go/commit/46306ee9fce77c2a0f4ee1d1265fd76dc95bd210))
+* handle empty bodies in WithJSONSet ([28adf94](https://github.com/dackerman/demostore-go/commit/28adf945e4764877a50643fbf1c0afd17b5039d9))
+* **pagination:** handle errors when applying options ([6cef623](https://github.com/dackerman/demostore-go/commit/6cef6238e4e615413ade0de0813bdcf2460ea0ed))
+* **test:** return early after test failure ([#60](https://github.com/dackerman/demostore-go/issues/60)) ([28903a1](https://github.com/dackerman/demostore-go/commit/28903a181acd8d22ea565fd8634c19a5501356e9))
+
+
+### Chores
+
+* add request options to client tests ([#59](https://github.com/dackerman/demostore-go/issues/59)) ([c0532f4](https://github.com/dackerman/demostore-go/commit/c0532f4a07986ea07f1a237f9828848511e8d93b))
+* **ci:** add timeout thresholds for CI jobs ([ddabfde](https://github.com/dackerman/demostore-go/commit/ddabfdeeff3ce4145c3ca91bbad1d80fd1d03e99))
+* **ci:** only use depot for staging repos ([44999bc](https://github.com/dackerman/demostore-go/commit/44999bc93221fe4cd734916a95376717976b4800))
+* **docs:** document pre-request options ([cc03554](https://github.com/dackerman/demostore-go/commit/cc035540085082ef2dd89c518447697656b06136))
+* **docs:** improve security documentation ([#57](https://github.com/dackerman/demostore-go/issues/57)) ([4843910](https://github.com/dackerman/demostore-go/commit/4843910bf32df111ae52d09195b91bebb1cb019d))
+* fix typos ([#61](https://github.com/dackerman/demostore-go/issues/61)) ([8a38ad7](https://github.com/dackerman/demostore-go/commit/8a38ad7a1105ab87dc45ca8266960fafbb0661cb))
+* **internal:** codegen related update ([ac4476a](https://github.com/dackerman/demostore-go/commit/ac4476af7eb95c506e19547f44714f73f0529ef5))
+* **internal:** expand CI branch coverage ([f89709b](https://github.com/dackerman/demostore-go/commit/f89709b59bf565632c76e46b0d8fcc04fcc12eab))
+* **internal:** reduce CI branch coverage ([f0a7037](https://github.com/dackerman/demostore-go/commit/f0a703737b9a43f2dc70631d50a6e7cc2f584ed7))
+
+
+### Documentation
+
+* update documentation links to be more uniform ([3476b8e](https://github.com/dackerman/demostore-go/commit/3476b8e12fba9e2e75616d0474b591c3f3559709))
+
 ## 0.3.0 (2025-03-20)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/dackerman/demostore-go/compare/v0.2.0...v0.3.0)
