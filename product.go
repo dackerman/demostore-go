@@ -214,6 +214,8 @@ func (r ProductNewParams) MarshalJSON() (data []byte, err error) {
 }
 
 type ProductGetParams struct {
+	// The ID of the organization you're a part of
+	//
 	// Use [option.WithOrgID] on the client to set a global default for this field.
 	OrgID param.Field[string] `path:"org_id,required"`
 }
