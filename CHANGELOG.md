@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.0 (2025-05-16)
+
+Full Changelog: [v0.4.0...v1.0.0](https://github.com/dackerman/demostore-go/compare/v0.4.0...v1.0.0)
+
+### Features
+
+* **api:** update via SDK Studio ([615e28c](https://github.com/dackerman/demostore-go/commit/615e28ccaaf22a26cdfa6a2ed7d08cc69ed838ae))
+* **api:** update via SDK Studio ([eaca349](https://github.com/dackerman/demostore-go/commit/eaca349e2e678b3d07271f407ebd801838484f1f))
+* **api:** update via SDK Studio ([2c729db](https://github.com/dackerman/demostore-go/commit/2c729dbc5fb83ceb60b4b89c3f75d71d5d6cdb16))
+* **client:** add support for endpoint-specific base URLs in python ([d70e34d](https://github.com/dackerman/demostore-go/commit/d70e34db90bdaa4d684dc8b1d87ddd27b22ab79d))
+
 ## 0.4.0 (2025-05-07)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/dackerman/demostore-go/compare/v0.3.0...v0.4.0)
