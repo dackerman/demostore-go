@@ -1,6 +1,6 @@
 # Stainless Store Go API Library
 
-<a href="https://pkg.go.dev/github.com/dackerman/demostore-go"><img src="https://pkg.go.dev/badge/github.com/dackerman/demostore-go.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/dackerman/demostore-go/v2"><img src="https://pkg.go.dev/badge/github.com/dackerman/demostore-go.svg" alt="Go Reference"></a>
 
 The Stainless Store Go library provides convenient access to the [Stainless Store REST API](https://docs.dackerman-store.com)
 from applications written in Go.
@@ -17,7 +17,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ```go
 import (
-	"github.com/dackerman/demostore-go" // imported as dackermanstore
+	"github.com/dackerman/demostore-go/v2" // imported as dackermanstore
 )
 ```
 
@@ -28,7 +28,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/dackerman/demostore-go@v1.0.0'
+go get -u 'github.com/dackerman/demostore-go@v2.0.0'
 ```
 
 <!-- x-release-please-end -->
@@ -48,8 +48,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/dackerman/demostore-go"
-	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/v2"
+	"github.com/dackerman/demostore-go/v2/option"
 )
 
 func main() {

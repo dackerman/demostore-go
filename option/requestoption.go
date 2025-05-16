@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dackerman/demostore-go/internal/requestconfig"
+	"github.com/dackerman/demostore-go/v2/internal/requestconfig"
 	"github.com/tidwall/sjson"
 )
 

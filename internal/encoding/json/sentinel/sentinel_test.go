@@ -1,7 +1,7 @@
 package sentinel_test
 
 import (
-	"github.com/dackerman/demostore-go/internal/encoding/json/sentinel"
+	"github.com/dackerman/demostore-go/v2/internal/encoding/json/sentinel"
 	"reflect"
 	"slices"
 	"testing"

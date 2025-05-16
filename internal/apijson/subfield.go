@@ -1,7 +1,7 @@
 package apijson
 
 import (
-	"github.com/dackerman/demostore-go/packages/respjson"
+	"github.com/dackerman/demostore-go/v2/packages/respjson"
 	"reflect"
 )
 

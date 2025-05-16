@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/dackerman/demostore-go/packages/param"
+	"github.com/dackerman/demostore-go/v2/packages/param"
 )
 
 var encoders sync.Map // map[encoderEntry]encoderFunc

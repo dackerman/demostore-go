@@ -7,7 +7,7 @@ package apijson
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/dackerman/demostore-go/packages/param"
+	"github.com/dackerman/demostore-go/v2/packages/param"
 	"reflect"
 	"strconv"
 	"sync"
