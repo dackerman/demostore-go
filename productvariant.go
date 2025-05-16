@@ -9,10 +9,9 @@ import (
 	"net/http"
 
 	"github.com/dackerman/demostore-go/internal/apijson"
+	"github.com/dackerman/demostore-go/internal/param"
 	"github.com/dackerman/demostore-go/internal/requestconfig"
 	"github.com/dackerman/demostore-go/option"
-	"github.com/dackerman/demostore-go/packages/param"
-	"github.com/dackerman/demostore-go/packages/respjson"
 )
 
 // ProductVariantService contains methods and other services that help with
@@ -28,8 +27,8 @@ type ProductVariantService struct {
 // NewProductVariantService generates a new service that applies the given options
 // to each request. These options are applied after the parent client's options (if
 // there is one), and before any request-specific options.
-func NewProductVariantService(opts ...option.RequestOption) (r ProductVariantService) {
-	r = ProductVariantService{}
+func NewProductVariantService(opts ...option.RequestOption) (r *ProductVariantService) {
+	r = &ProductVariantService{}
 	r.Options = opts
 	return
 }
@@ -50,7 +49,7 @@ func (r *ProductVariantService) New(ctx context.Context, productID string, param
 		err = errors.New("missing required product_id parameter")
 		return
 	}
-	path := fmt.Sprintf("orgs/%s/products/%s/variants", params.OrgID.Value, productID)
+	path := fmt.Sprintf("orgs/%s/products/%s/variants", params.OrgID, productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPost, path, params, &res, opts...)
 	return
 }
@@ -75,7 +74,7 @@ func (r *ProductVariantService) Get(ctx context.Context, productID string, varia
 		err = errors.New("missing required variant_id parameter")
 		return
 	}
-	path := fmt.Sprintf("orgs/%s/products/%s/variants/%s", query.OrgID.Value, productID, variantID)
+	path := fmt.Sprintf("orgs/%s/products/%s/variants/%s", query.OrgID, productID, variantID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
 }
@@ -100,7 +99,7 @@ func (r *ProductVariantService) Update(ctx context.Context, productID string, va
 		err = errors.New("missing required variant_id parameter")
 		return
 	}
-	path := fmt.Sprintf("orgs/%s/products/%s/variants/%s", params.OrgID.Value, productID, variantID)
+	path := fmt.Sprintf("orgs/%s/products/%s/variants/%s", params.OrgID, productID, variantID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodPut, path, params, &res, opts...)
 	return
 }
@@ -121,7 +120,7 @@ func (r *ProductVariantService) List(ctx context.Context, productID string, quer
 		err = errors.New("missing required product_id parameter")
 		return
 	}
-	path := fmt.Sprintf("orgs/%s/products/%s/variants", query.OrgID.Value, productID)
+	path := fmt.Sprintf("orgs/%s/products/%s/variants", query.OrgID, productID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodGet, path, nil, &res, opts...)
 	return
 }
@@ -146,100 +145,96 @@ func (r *ProductVariantService) Delete(ctx context.Context, productID string, va
 		err = errors.New("missing required variant_id parameter")
 		return
 	}
-	path := fmt.Sprintf("orgs/%s/products/%s/variants/%s", body.OrgID.Value, productID, variantID)
+	path := fmt.Sprintf("orgs/%s/products/%s/variants/%s", body.OrgID, productID, variantID)
 	err = requestconfig.ExecuteNewRequest(ctx, http.MethodDelete, path, nil, &res, opts...)
 	return
 }
 
 // Represents a ProductVariant record
 type ProductVariant struct {
-	ImageURL  string `json:"image_url,required"`
-	Name      string `json:"name,required"`
-	Price     int64  `json:"price,required"`
-	ProductID string `json:"product_id,required"`
-	VariantID string `json:"variant_id,required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		ImageURL    respjson.Field
-		Name        respjson.Field
-		Price       respjson.Field
-		ProductID   respjson.Field
-		VariantID   respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
+	ImageURL  string             `json:"image_url,required"`
+	Name      string             `json:"name,required"`
+	Price     int64              `json:"price,required"`
+	ProductID string             `json:"product_id,required"`
+	VariantID string             `json:"variant_id,required"`
+	JSON      productVariantJSON `json:"-"`
 }
 
-// Returns the unmodified JSON received from the API
-func (r ProductVariant) RawJSON() string { return r.JSON.raw }
-func (r *ProductVariant) UnmarshalJSON(data []byte) error {
+// productVariantJSON contains the JSON metadata for the struct [ProductVariant]
+type productVariantJSON struct {
+	ImageURL    apijson.Field
+	Name        apijson.Field
+	Price       apijson.Field
+	ProductID   apijson.Field
+	VariantID   apijson.Field
+	raw         string
+	ExtraFields map[string]apijson.Field
+}
+
+func (r *ProductVariant) UnmarshalJSON(data []byte) (err error) {
 	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r productVariantJSON) RawJSON() string {
+	return r.raw
 }
 
 type ProductVariantDeleteResponse struct {
-	Success bool `json:"success,required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Success     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
+	Success bool                             `json:"success,required"`
+	JSON    productVariantDeleteResponseJSON `json:"-"`
 }
 
-// Returns the unmodified JSON received from the API
-func (r ProductVariantDeleteResponse) RawJSON() string { return r.JSON.raw }
-func (r *ProductVariantDeleteResponse) UnmarshalJSON(data []byte) error {
+// productVariantDeleteResponseJSON contains the JSON metadata for the struct
+// [ProductVariantDeleteResponse]
+type productVariantDeleteResponseJSON struct {
+	Success     apijson.Field
+	raw         string
+	ExtraFields map[string]apijson.Field
+}
+
+func (r *ProductVariantDeleteResponse) UnmarshalJSON(data []byte) (err error) {
 	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r productVariantDeleteResponseJSON) RawJSON() string {
+	return r.raw
 }
 
 type ProductVariantNewParams struct {
 	// Use [option.WithOrgID] on the client to set a global default for this field.
-	OrgID    param.Opt[string] `path:"org_id,omitzero,required" json:"-"`
-	ImageURL string            `json:"image_url,required"`
-	Name     string            `json:"name,required"`
-	Price    int64             `json:"price,required"`
-	paramObj
+	OrgID    param.Field[string] `path:"org_id,required"`
+	ImageURL param.Field[string] `json:"image_url,required"`
+	Name     param.Field[string] `json:"name,required"`
+	Price    param.Field[int64]  `json:"price,required"`
 }
 
 func (r ProductVariantNewParams) MarshalJSON() (data []byte, err error) {
-	type shadow ProductVariantNewParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *ProductVariantNewParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
+	return apijson.MarshalRoot(r)
 }
 
 type ProductVariantGetParams struct {
 	// Use [option.WithOrgID] on the client to set a global default for this field.
-	OrgID param.Opt[string] `path:"org_id,omitzero,required" json:"-"`
-	paramObj
+	OrgID param.Field[string] `path:"org_id,required"`
 }
 
 type ProductVariantUpdateParams struct {
 	// Use [option.WithOrgID] on the client to set a global default for this field.
-	OrgID    param.Opt[string] `path:"org_id,omitzero,required" json:"-"`
-	ImageURL string            `json:"image_url,required"`
-	Name     string            `json:"name,required"`
-	Price    int64             `json:"price,required"`
-	paramObj
+	OrgID    param.Field[string] `path:"org_id,required"`
+	ImageURL param.Field[string] `json:"image_url,required"`
+	Name     param.Field[string] `json:"name,required"`
+	Price    param.Field[int64]  `json:"price,required"`
 }
 
 func (r ProductVariantUpdateParams) MarshalJSON() (data []byte, err error) {
-	type shadow ProductVariantUpdateParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *ProductVariantUpdateParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
+	return apijson.MarshalRoot(r)
 }
 
 type ProductVariantListParams struct {
 	// Use [option.WithOrgID] on the client to set a global default for this field.
-	OrgID param.Opt[string] `path:"org_id,omitzero,required" json:"-"`
-	paramObj
+	OrgID param.Field[string] `path:"org_id,required"`
 }
 
 type ProductVariantDeleteParams struct {
 	// Use [option.WithOrgID] on the client to set a global default for this field.
-	OrgID param.Opt[string] `path:"org_id,omitzero,required" json:"-"`
-	paramObj
+	OrgID param.Field[string] `path:"org_id,required"`
 }

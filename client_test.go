@@ -40,11 +40,11 @@ func TestUserAgentHeader(t *testing.T) {
 		}),
 	)
 	client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
-		Description: "description",
-		ImageURL:    "image_url",
-		Name:        "name",
-		Price:       0,
+		OrgID:       dackermanstore.F("org_id"),
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if userAgent != fmt.Sprintf("StainlessStore/Go %s", internal.PackageVersion) {
 		t.Errorf("Expected User-Agent to be correct, but got: %#v", userAgent)
@@ -71,11 +71,11 @@ func TestRetryAfter(t *testing.T) {
 		}),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
-		Description: "description",
-		ImageURL:    "image_url",
-		Name:        "name",
-		Price:       0,
+		OrgID:       dackermanstore.F("org_id"),
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -113,11 +113,11 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		option.WithHeaderDel("X-Stainless-Retry-Count"),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
-		Description: "description",
-		ImageURL:    "image_url",
-		Name:        "name",
-		Price:       0,
+		OrgID:       dackermanstore.F("org_id"),
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -150,11 +150,11 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		option.WithHeader("X-Stainless-Retry-Count", "42"),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
-		Description: "description",
-		ImageURL:    "image_url",
-		Name:        "name",
-		Price:       0,
+		OrgID:       dackermanstore.F("org_id"),
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -186,11 +186,11 @@ func TestRetryAfterMs(t *testing.T) {
 		}),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
-		Description: "description",
-		ImageURL:    "image_url",
-		Name:        "name",
-		Price:       0,
+		OrgID:       dackermanstore.F("org_id"),
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -216,11 +216,11 @@ func TestContextCancel(t *testing.T) {
 	cancelCtx, cancel := context.WithCancel(context.Background())
 	cancel()
 	_, err := client.Products.New(cancelCtx, dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
-		Description: "description",
-		ImageURL:    "image_url",
-		Name:        "name",
-		Price:       0,
+		OrgID:       dackermanstore.F("org_id"),
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil {
 		t.Error("Expected there to be a cancel error")
@@ -243,11 +243,11 @@ func TestContextCancelDelay(t *testing.T) {
 	cancelCtx, cancel := context.WithTimeout(context.Background(), 2*time.Millisecond)
 	defer cancel()
 	_, err := client.Products.New(cancelCtx, dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
-		Description: "description",
-		ImageURL:    "image_url",
-		Name:        "name",
-		Price:       0,
+		OrgID:       dackermanstore.F("org_id"),
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err == nil {
 		t.Error("expected there to be a cancel error")
@@ -276,11 +276,11 @@ func TestContextDeadline(t *testing.T) {
 			}),
 		)
 		_, err := client.Products.New(deadlineCtx, dackermanstore.ProductNewParams{
-			OrgID:       dackermanstore.String("org_id"),
-			Description: "description",
-			ImageURL:    "image_url",
-			Name:        "name",
-			Price:       0,
+			OrgID:       dackermanstore.F("org_id"),
+			Description: dackermanstore.F("description"),
+			ImageURL:    dackermanstore.F("image_url"),
+			Name:        dackermanstore.F("name"),
+			Price:       dackermanstore.F(int64(0)),
 		})
 		if err == nil {
 			t.Error("expected there to be a deadline error")

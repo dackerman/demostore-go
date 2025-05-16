@@ -26,14 +26,15 @@ func TestUsage(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
-		Description: "description",
-		ImageURL:    "image_url",
-		Name:        "name",
-		Price:       0,
+		OrgID:       dackermanstore.F("org_id"),
+		Description: dackermanstore.F("description"),
+		ImageURL:    dackermanstore.F("image_url"),
+		Name:        dackermanstore.F("name"),
+		Price:       dackermanstore.F(int64(0)),
 	})
 	if err != nil {
-		t.Fatalf("err should be nil: %s", err.Error())
+		t.Error(err)
+		return
 	}
 	t.Logf("%+v\n", product.ProductID)
 }
