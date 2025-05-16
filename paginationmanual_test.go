@@ -26,7 +26,7 @@ func TestManualPagination(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	page, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{
-		OrgID: dackermanstore.String("org_id"),
+		OrgID: dackermanstore.F("org_id"),
 	})
 	if err != nil {
 		t.Fatalf("err should be nil: %s", err.Error())

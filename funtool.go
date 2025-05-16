@@ -7,10 +7,9 @@ import (
 	"net/http"
 
 	"github.com/dackerman/demostore-go/internal/apijson"
+	"github.com/dackerman/demostore-go/internal/param"
 	"github.com/dackerman/demostore-go/internal/requestconfig"
 	"github.com/dackerman/demostore-go/option"
-	"github.com/dackerman/demostore-go/packages/param"
-	"github.com/dackerman/demostore-go/packages/respjson"
 )
 
 // FuntoolService contains methods and other services that help with interacting
@@ -26,8 +25,8 @@ type FuntoolService struct {
 // NewFuntoolService generates a new service that applies the given options to each
 // request. These options are applied after the parent client's options (if there
 // is one), and before any request-specific options.
-func NewFuntoolService(opts ...option.RequestOption) (r FuntoolService) {
-	r = FuntoolService{}
+func NewFuntoolService(opts ...option.RequestOption) (r *FuntoolService) {
+	r = &FuntoolService{}
 	r.Options = opts
 	return
 }
@@ -41,30 +40,30 @@ func (r *FuntoolService) SetDarkmode(ctx context.Context, body FuntoolSetDarkmod
 }
 
 type FuntoolSetDarkmodeResponse struct {
-	Success bool `json:"success,required"`
-	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
-	JSON struct {
-		Success     respjson.Field
-		ExtraFields map[string]respjson.Field
-		raw         string
-	} `json:"-"`
+	Success bool                           `json:"success,required"`
+	JSON    funtoolSetDarkmodeResponseJSON `json:"-"`
 }
 
-// Returns the unmodified JSON received from the API
-func (r FuntoolSetDarkmodeResponse) RawJSON() string { return r.JSON.raw }
-func (r *FuntoolSetDarkmodeResponse) UnmarshalJSON(data []byte) error {
+// funtoolSetDarkmodeResponseJSON contains the JSON metadata for the struct
+// [FuntoolSetDarkmodeResponse]
+type funtoolSetDarkmodeResponseJSON struct {
+	Success     apijson.Field
+	raw         string
+	ExtraFields map[string]apijson.Field
+}
+
+func (r *FuntoolSetDarkmodeResponse) UnmarshalJSON(data []byte) (err error) {
 	return apijson.UnmarshalRoot(data, r)
+}
+
+func (r funtoolSetDarkmodeResponseJSON) RawJSON() string {
+	return r.raw
 }
 
 type FuntoolSetDarkmodeParams struct {
-	Darkmode bool `json:"darkmode,required"`
-	paramObj
+	Darkmode param.Field[bool] `json:"darkmode,required"`
 }
 
 func (r FuntoolSetDarkmodeParams) MarshalJSON() (data []byte, err error) {
-	type shadow FuntoolSetDarkmodeParams
-	return param.MarshalObject(r, (*shadow)(&r))
-}
-func (r *FuntoolSetDarkmodeParams) UnmarshalJSON(data []byte) error {
-	return apijson.UnmarshalRoot(data, r)
+	return apijson.MarshalRoot(r)
 }

@@ -30,10 +30,10 @@ func TestProductVariantNew(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductVariantNewParams{
-			OrgID:    dackermanstore.String("org_id"),
-			ImageURL: "image_url",
-			Name:     "name",
-			Price:    0,
+			OrgID:    dackermanstore.F("org_id"),
+			ImageURL: dackermanstore.F("image_url"),
+			Name:     dackermanstore.F("name"),
+			Price:    dackermanstore.F(int64(0)),
 		},
 	)
 	if err != nil {
@@ -63,7 +63,7 @@ func TestProductVariantGet(t *testing.T) {
 		"product_id",
 		"variant_id",
 		dackermanstore.ProductVariantGetParams{
-			OrgID: dackermanstore.String("org_id"),
+			OrgID: dackermanstore.F("org_id"),
 		},
 	)
 	if err != nil {
@@ -93,10 +93,10 @@ func TestProductVariantUpdate(t *testing.T) {
 		"product_id",
 		"variant_id",
 		dackermanstore.ProductVariantUpdateParams{
-			OrgID:    dackermanstore.String("org_id"),
-			ImageURL: "image_url",
-			Name:     "name",
-			Price:    0,
+			OrgID:    dackermanstore.F("org_id"),
+			ImageURL: dackermanstore.F("image_url"),
+			Name:     dackermanstore.F("name"),
+			Price:    dackermanstore.F(int64(0)),
 		},
 	)
 	if err != nil {
@@ -125,7 +125,7 @@ func TestProductVariantList(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductVariantListParams{
-			OrgID: dackermanstore.String("org_id"),
+			OrgID: dackermanstore.F("org_id"),
 		},
 	)
 	if err != nil {
@@ -155,7 +155,7 @@ func TestProductVariantDelete(t *testing.T) {
 		"product_id",
 		"variant_id",
 		dackermanstore.ProductVariantDeleteParams{
-			OrgID: dackermanstore.String("org_id"),
+			OrgID: dackermanstore.F("org_id"),
 		},
 	)
 	if err != nil {

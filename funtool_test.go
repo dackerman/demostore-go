@@ -27,7 +27,7 @@ func TestFuntoolSetDarkmode(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	_, err := client.Funtools.SetDarkmode(context.TODO(), dackermanstore.FuntoolSetDarkmodeParams{
-		Darkmode: true,
+		Darkmode: dackermanstore.F(true),
 	})
 	if err != nil {
 		var apierr *dackermanstore.Error
