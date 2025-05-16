@@ -9,31 +9,34 @@ import (
 	"github.com/dackerman/demostore-go/internal/apijson"
 	"github.com/dackerman/demostore-go/internal/requestconfig"
 	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/packages/param"
+	"github.com/dackerman/demostore-go/packages/respjson"
 )
 
+// aliased to make [param.APIUnion] private when embedding
+type paramUnion = param.APIUnion
+
+// aliased to make [param.APIObject] private when embedding
+type paramObj = param.APIObject
+
 type OffsetPagination[T any] struct {
-	Data []T                  `json:"data"`
-	Next int64                `json:"next"`
-	JSON offsetPaginationJSON `json:"-"`
-	cfg  *requestconfig.RequestConfig
-	res  *http.Response
+	Data []T   `json:"data"`
+	Next int64 `json:"next"`
+	// JSON contains metadata for fields, check presence with [respjson.Field.Valid].
+	JSON struct {
+		Data        respjson.Field
+		Next        respjson.Field
+		ExtraFields map[string]respjson.Field
+		raw         string
+	} `json:"-"`
+	cfg *requestconfig.RequestConfig
+	res *http.Response
 }
 
-// offsetPaginationJSON contains the JSON metadata for the struct
-// [OffsetPagination[T]]
-type offsetPaginationJSON struct {
-	Data        apijson.Field
-	Next        apijson.Field
-	raw         string
-	ExtraFields map[string]apijson.Field
-}
-
-func (r *OffsetPagination[T]) UnmarshalJSON(data []byte) (err error) {
+// Returns the unmodified JSON received from the API
+func (r OffsetPagination[T]) RawJSON() string { return r.JSON.raw }
+func (r *OffsetPagination[T]) UnmarshalJSON(data []byte) error {
 	return apijson.UnmarshalRoot(data, r)
-}
-
-func (r offsetPaginationJSON) RawJSON() string {
-	return r.raw
 }
 
 // GetNextPage returns the next page as defined by this pagination style. When
@@ -78,6 +81,7 @@ type OffsetPaginationAutoPager[T any] struct {
 	idx  int
 	run  int
 	err  error
+	paramObj
 }
 
 func NewOffsetPaginationAutoPager[T any](page *OffsetPagination[T], err error) *OffsetPaginationAutoPager[T] {
