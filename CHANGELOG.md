@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.0 (2025-05-16)
+
+Full Changelog: [v1.0.0...v2.0.0](https://github.com/dackerman/demostore-go/compare/v1.0.0...v2.0.0)
+
+### Features
+
+* **api:** update via SDK Studio ([05a5e57](https://github.com/dackerman/demostore-go/commit/05a5e57ae60f40c2b882771a8cb0b7afcbfb176e))
+
 ## 1.0.0 (2025-05-16)
 
 Full Changelog: [v0.4.0...v1.0.0](https://github.com/dackerman/demostore-go/compare/v0.4.0...v1.0.0)

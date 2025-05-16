@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go"
-	"github.com/dackerman/demostore-go/internal/testutil"
-	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/v2"
+	"github.com/dackerman/demostore-go/v2/internal/testutil"
+	"github.com/dackerman/demostore-go/v2/option"
 )
 
 func TestUsage(t *testing.T) {
@@ -26,15 +26,14 @@ func TestUsage(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.F("org_id"),
-		Description: dackermanstore.F("description"),
-		ImageURL:    dackermanstore.F("image_url"),
-		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(int64(0)),
+		OrgID:       dackermanstore.String("org_id"),
+		Description: "description",
+		ImageURL:    "image_url",
+		Name:        "name",
+		Price:       0,
 	})
 	if err != nil {
-		t.Error(err)
-		return
+		t.Fatalf("err should be nil: %s", err.Error())
 	}
 	t.Logf("%+v\n", product.ProductID)
 }

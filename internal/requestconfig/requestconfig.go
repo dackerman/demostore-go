@@ -18,11 +18,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dackerman/demostore-go/internal"
-	"github.com/dackerman/demostore-go/internal/apierror"
-	"github.com/dackerman/demostore-go/internal/apiform"
-	"github.com/dackerman/demostore-go/internal/apiquery"
-	"github.com/dackerman/demostore-go/internal/param"
+	"github.com/dackerman/demostore-go/v2/internal"
+	"github.com/dackerman/demostore-go/v2/internal/apierror"
+	"github.com/dackerman/demostore-go/v2/internal/apiform"
+	"github.com/dackerman/demostore-go/v2/internal/apiquery"
+	"github.com/dackerman/demostore-go/v2/packages/param"
 )
 
 func getDefaultHeaders() map[string]string {
@@ -88,7 +88,7 @@ type PreRequestOptionFunc func(*RequestConfig) error
 func (s RequestOptionFunc) Apply(r *RequestConfig) error    { return s(r) }
 func (s PreRequestOptionFunc) Apply(r *RequestConfig) error { return s(r) }
 
-func NewRequestConfig(ctx context.Context, method string, u string, body interface{}, dst interface{}, opts ...RequestOption) (*RequestConfig, error) {
+func NewRequestConfig(ctx context.Context, method string, u string, body any, dst any, opts ...RequestOption) (*RequestConfig, error) {
 	var reader io.Reader
 
 	contentType := "application/json"
@@ -116,7 +116,11 @@ func NewRequestConfig(ctx context.Context, method string, u string, body interfa
 	}
 	if body, ok := body.(apiquery.Queryer); ok {
 		hasSerializationFunc = true
-		params := body.URLQuery().Encode()
+		q, err := body.URLQuery()
+		if err != nil {
+			return nil, err
+		}
+		params := q.Encode()
 		if params != "" {
 			u = u + "?" + params
 		}
@@ -185,10 +189,9 @@ func NewRequestConfig(ctx context.Context, method string, u string, body interfa
 	return &cfg, nil
 }
 
-func UseDefaultParam[T any](dst *param.Field[T], src *T) {
-	if !dst.Present && src != nil {
-		dst.Value = *src
-		dst.Present = true
+func UseDefaultParam[T comparable](dst *param.Opt[T], src *T) {
+	if param.IsOmitted(*dst) && src != nil {
+		*dst = param.NewOpt(*src)
 	}
 }
 
@@ -219,7 +222,7 @@ type RequestConfig struct {
 	// If ResponseBodyInto not nil, then we will attempt to deserialize into
 	// ResponseBodyInto. If Destination is a []byte, then it will return the body as
 	// is.
-	ResponseBodyInto interface{}
+	ResponseBodyInto any
 	// ResponseInto copies the \*http.Response of the corresponding request into the
 	// given address
 	ResponseInto **http.Response
@@ -554,7 +557,7 @@ func (cfg *RequestConfig) Execute() (err error) {
 	return nil
 }
 
-func ExecuteNewRequest(ctx context.Context, method string, u string, body interface{}, dst interface{}, opts ...RequestOption) error {
+func ExecuteNewRequest(ctx context.Context, method string, u string, body any, dst any, opts ...RequestOption) error {
 	cfg, err := NewRequestConfig(ctx, method, u, body, dst, opts...)
 	if err != nil {
 		return err

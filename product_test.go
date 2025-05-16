@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go"
-	"github.com/dackerman/demostore-go/internal/testutil"
-	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/v2"
+	"github.com/dackerman/demostore-go/v2/internal/testutil"
+	"github.com/dackerman/demostore-go/v2/option"
 )
 
 func TestProductNew(t *testing.T) {
@@ -27,11 +27,11 @@ func TestProductNew(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	_, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.F("org_id"),
-		Description: dackermanstore.F("description"),
-		ImageURL:    dackermanstore.F("image_url"),
-		Name:        dackermanstore.F("name"),
-		Price:       dackermanstore.F(int64(0)),
+		OrgID:       dackermanstore.String("org_id"),
+		Description: "description",
+		ImageURL:    "image_url",
+		Name:        "name",
+		Price:       0,
 	})
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -59,7 +59,7 @@ func TestProductGet(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductGetParams{
-			OrgID: dackermanstore.F("org_id"),
+			OrgID: dackermanstore.String("org_id"),
 		},
 	)
 	if err != nil {
@@ -88,11 +88,11 @@ func TestProductUpdate(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductUpdateParams{
-			OrgID:       dackermanstore.F("org_id"),
-			Description: dackermanstore.F("description"),
-			ImageURL:    dackermanstore.F("image_url"),
-			Name:        dackermanstore.F("name"),
-			Price:       dackermanstore.F(int64(0)),
+			OrgID:       dackermanstore.String("org_id"),
+			Description: "description",
+			ImageURL:    "image_url",
+			Name:        "name",
+			Price:       0,
 		},
 	)
 	if err != nil {
@@ -118,9 +118,9 @@ func TestProductListWithOptionalParams(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	_, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{
-		OrgID: dackermanstore.F("org_id"),
-		Limit: dackermanstore.F(int64(0)),
-		Skip:  dackermanstore.F(int64(0)),
+		OrgID: dackermanstore.String("org_id"),
+		Limit: dackermanstore.Int(0),
+		Skip:  dackermanstore.Int(0),
 	})
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -148,7 +148,7 @@ func TestProductDelete(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductDeleteParams{
-			OrgID: dackermanstore.F("org_id"),
+			OrgID: dackermanstore.String("org_id"),
 		},
 	)
 	if err != nil {

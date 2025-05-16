@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go"
-	"github.com/dackerman/demostore-go/internal/testutil"
-	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/v2"
+	"github.com/dackerman/demostore-go/v2/internal/testutil"
+	"github.com/dackerman/demostore-go/v2/option"
 )
 
 func TestFuntoolSetDarkmode(t *testing.T) {
@@ -27,7 +27,7 @@ func TestFuntoolSetDarkmode(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	_, err := client.Funtools.SetDarkmode(context.TODO(), dackermanstore.FuntoolSetDarkmodeParams{
-		Darkmode: dackermanstore.F(true),
+		Darkmode: true,
 	})
 	if err != nil {
 		var apierr *dackermanstore.Error

@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go"
-	"github.com/dackerman/demostore-go/internal/testutil"
-	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/v2"
+	"github.com/dackerman/demostore-go/v2/internal/testutil"
+	"github.com/dackerman/demostore-go/v2/option"
 )
 
 func TestAutoPagination(t *testing.T) {
@@ -26,7 +26,7 @@ func TestAutoPagination(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	iter := client.Products.ListAutoPaging(context.TODO(), dackermanstore.ProductListParams{
-		OrgID: dackermanstore.F("org_id"),
+		OrgID: dackermanstore.String("org_id"),
 	})
 	// Prism mock isn't going to give us real pagination
 	for i := 0; i < 3 && iter.Next(); i++ {
