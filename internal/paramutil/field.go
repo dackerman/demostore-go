@@ -1,8 +1,8 @@
 package paramutil
 
 import (
-	"github.com/dackerman/demostore-go/packages/param"
-	"github.com/dackerman/demostore-go/packages/respjson"
+	"github.com/dackerman/demostore-go/v2/packages/param"
+	"github.com/dackerman/demostore-go/v2/packages/respjson"
 )
 
 func AddrIfPresent[T comparable](v param.Opt[T]) *T {

@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/dackerman/demostore-go/internal/requestconfig"
-	"github.com/dackerman/demostore-go/option"
+	"github.com/dackerman/demostore-go/v2/internal/requestconfig"
+	"github.com/dackerman/demostore-go/v2/option"
 )
 
 // Client creates a struct with services and top level methods that help with

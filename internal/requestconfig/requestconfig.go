@@ -18,11 +18,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dackerman/demostore-go/internal"
-	"github.com/dackerman/demostore-go/internal/apierror"
-	"github.com/dackerman/demostore-go/internal/apiform"
-	"github.com/dackerman/demostore-go/internal/apiquery"
-	"github.com/dackerman/demostore-go/packages/param"
+	"github.com/dackerman/demostore-go/v2/internal"
+	"github.com/dackerman/demostore-go/v2/internal/apierror"
+	"github.com/dackerman/demostore-go/v2/internal/apiform"
+	"github.com/dackerman/demostore-go/v2/internal/apiquery"
+	"github.com/dackerman/demostore-go/v2/packages/param"
 )
 
 func getDefaultHeaders() map[string]string {

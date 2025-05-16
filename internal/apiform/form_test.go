@@ -2,7 +2,7 @@ package apiform
 
 import (
 	"bytes"
-	"github.com/dackerman/demostore-go/packages/param"
+	"github.com/dackerman/demostore-go/v2/packages/param"
 	"io"
 	"mime/multipart"
 	"strings"

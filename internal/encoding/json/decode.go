@@ -14,7 +14,7 @@ import (
 	"encoding"
 	"encoding/base64"
 	"fmt"
-	"github.com/dackerman/demostore-go/internal/encoding/json/shims"
+	"github.com/dackerman/demostore-go/v2/internal/encoding/json/shims"
 	"reflect"
 	"strconv"
 	"strings"

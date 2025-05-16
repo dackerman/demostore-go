@@ -3,8 +3,8 @@ package respjson_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/dackerman/demostore-go/internal/apijson"
-	rj "github.com/dackerman/demostore-go/packages/respjson"
+	"github.com/dackerman/demostore-go/v2/internal/apijson"
+	rj "github.com/dackerman/demostore-go/v2/packages/respjson"
 	"reflect"
 	"testing"
 )

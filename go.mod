@@ -1,4 +1,4 @@
-module github.com/dackerman/demostore-go
+module github.com/dackerman/demostore-go/v2
 
 go 1.21
 
