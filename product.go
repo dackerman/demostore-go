@@ -211,7 +211,7 @@ func (r *ProductNewParams) UnmarshalJSON(data []byte) error {
 }
 
 type ProductGetParams struct {
-	// The ID of the organization you're a part of
+	// The ID of the organization
 	//
 	// Use [option.WithOrgID] on the client to set a global default for this field.
 	OrgID param.Opt[string] `path:"org_id,omitzero,required" json:"-"`
