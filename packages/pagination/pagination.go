@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/dackerman/demostore-go/v2/internal/apijson"
-	"github.com/dackerman/demostore-go/v2/internal/requestconfig"
-	"github.com/dackerman/demostore-go/v2/option"
-	"github.com/dackerman/demostore-go/v2/packages/param"
-	"github.com/dackerman/demostore-go/v2/packages/respjson"
+	"github.com/dackerman/demostore-private-go/v2/internal/apijson"
+	"github.com/dackerman/demostore-private-go/v2/internal/requestconfig"
+	"github.com/dackerman/demostore-private-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2/packages/param"
+	"github.com/dackerman/demostore-private-go/v2/packages/respjson"
 )
 
 // aliased to make [param.APIUnion] private when embedding

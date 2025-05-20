@@ -3,8 +3,8 @@
 package dackermanstore
 
 import (
-	"github.com/dackerman/demostore-go/v2/internal/apierror"
-	"github.com/dackerman/demostore-go/v2/packages/param"
+	"github.com/dackerman/demostore-private-go/v2/internal/apierror"
+	"github.com/dackerman/demostore-private-go/v2/packages/param"
 )
 
 // aliased to make [param.APIUnion] private when embedding

@@ -2,8 +2,8 @@ package apijson_test
 
 import (
 	"encoding/json"
-	"github.com/dackerman/demostore-go/v2/internal/apijson"
-	"github.com/dackerman/demostore-go/v2/packages/respjson"
+	"github.com/dackerman/demostore-private-go/v2/internal/apijson"
+	"github.com/dackerman/demostore-private-go/v2/packages/respjson"
 	"testing"
 )
 

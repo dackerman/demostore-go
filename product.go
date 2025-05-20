@@ -9,13 +9,13 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/dackerman/demostore-go/v2/internal/apijson"
-	"github.com/dackerman/demostore-go/v2/internal/apiquery"
-	"github.com/dackerman/demostore-go/v2/internal/requestconfig"
-	"github.com/dackerman/demostore-go/v2/option"
-	"github.com/dackerman/demostore-go/v2/packages/pagination"
-	"github.com/dackerman/demostore-go/v2/packages/param"
-	"github.com/dackerman/demostore-go/v2/packages/respjson"
+	"github.com/dackerman/demostore-private-go/v2/internal/apijson"
+	"github.com/dackerman/demostore-private-go/v2/internal/apiquery"
+	"github.com/dackerman/demostore-private-go/v2/internal/requestconfig"
+	"github.com/dackerman/demostore-private-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2/packages/pagination"
+	"github.com/dackerman/demostore-private-go/v2/packages/param"
+	"github.com/dackerman/demostore-private-go/v2/packages/respjson"
 )
 
 // ProductService contains methods and other services that help with interacting

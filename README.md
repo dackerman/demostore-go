@@ -1,6 +1,6 @@
 # Stainless Store Go API Library
 
-<a href="https://pkg.go.dev/github.com/dackerman/demostore-go/v2"><img src="https://pkg.go.dev/badge/github.com/dackerman/demostore-go/v2.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/dackerman/demostore-private-go/v2"><img src="https://pkg.go.dev/badge/github.com/dackerman/demostore-private-go/v2.svg" alt="Go Reference"></a>
 
 The Stainless Store Go library provides convenient access to the [Stainless Store REST API](https://docs.dackerman-store.com)
 from applications written in Go.
@@ -17,7 +17,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ```go
 import (
-	"github.com/dackerman/demostore-go/v2" // imported as dackermanstore
+	"github.com/dackerman/demostore-private-go/v2" // imported as dackermanstore
 )
 ```
 
@@ -28,7 +28,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/dackerman/demostore-go/v2@v2.0.0'
+go get -u 'github.com/dackerman/demostore-private-go/v2@v2.0.0'
 ```
 
 <!-- x-release-please-end -->
@@ -48,8 +48,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/dackerman/demostore-go/v2"
-	"github.com/dackerman/demostore-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2"
+	"github.com/dackerman/demostore-private-go/v2/option"
 )
 
 func main() {
@@ -281,7 +281,7 @@ client.Products.New(context.TODO(), ...,
 )
 ```
 
-See the [full list of request options](https://pkg.go.dev/github.com/dackerman/demostore-go/v2/option).
+See the [full list of request options](https://pkg.go.dev/github.com/dackerman/demostore-private-go/v2/option).
 
 ### Pagination
 
@@ -540,7 +540,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/dackerman/demostore-go/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/dackerman/demostore-private-go/issues) with questions, bugs, or suggestions.
 
 ## Contributing
 

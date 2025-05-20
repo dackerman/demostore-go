@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dackerman/demostore-go/v2"
-	"github.com/dackerman/demostore-go/v2/internal"
-	"github.com/dackerman/demostore-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2"
+	"github.com/dackerman/demostore-private-go/v2/internal"
+	"github.com/dackerman/demostore-private-go/v2/option"
 )
 
 type closureTransport struct {
