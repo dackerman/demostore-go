@@ -40,7 +40,6 @@ func TestUserAgentHeader(t *testing.T) {
 		}),
 	)
 	client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -71,7 +70,6 @@ func TestRetryAfter(t *testing.T) {
 		}),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -113,7 +111,6 @@ func TestDeleteRetryCountHeader(t *testing.T) {
 		option.WithHeaderDel("X-Stainless-Retry-Count"),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -150,7 +147,6 @@ func TestOverwriteRetryCountHeader(t *testing.T) {
 		option.WithHeader("X-Stainless-Retry-Count", "42"),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -186,7 +182,6 @@ func TestRetryAfterMs(t *testing.T) {
 		}),
 	)
 	_, err := client.Products.New(context.Background(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -216,7 +211,6 @@ func TestContextCancel(t *testing.T) {
 	cancelCtx, cancel := context.WithCancel(context.Background())
 	cancel()
 	_, err := client.Products.New(cancelCtx, dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -243,7 +237,6 @@ func TestContextCancelDelay(t *testing.T) {
 	cancelCtx, cancel := context.WithTimeout(context.Background(), 2*time.Millisecond)
 	defer cancel()
 	_, err := client.Products.New(cancelCtx, dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -276,7 +269,6 @@ func TestContextDeadline(t *testing.T) {
 			}),
 		)
 		_, err := client.Products.New(deadlineCtx, dackermanstore.ProductNewParams{
-			OrgID:       dackermanstore.String("org_id"),
 			Description: "description",
 			ImageURL:    "image_url",
 			Name:        "name",

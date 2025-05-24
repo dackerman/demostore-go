@@ -58,7 +58,6 @@ func main() {
 		option.WithOrgID("my_org"),                                   // defaults to os.LookupEnv("DEMOSTORE_ORG_ID")
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -290,9 +289,7 @@ This library provides some conveniences for working with paginated list endpoint
 You can use `.ListAutoPaging()` methods to iterate through items across all pages:
 
 ```go
-iter := client.Products.ListAutoPaging(context.TODO(), dackermanstore.ProductListParams{
-	OrgID: dackermanstore.String("org_id"),
-})
+iter := client.Products.ListAutoPaging(context.TODO(), dackermanstore.ProductListParams{})
 // Automatically fetches more pages as needed.
 for iter.Next() {
 	product := iter.Current()
@@ -307,9 +304,7 @@ Or you can use simple `.List()` methods to fetch a single page and receive a sta
 with additional helper methods like `.GetNextPage()`, e.g.:
 
 ```go
-page, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{
-	OrgID: dackermanstore.String("org_id"),
-})
+page, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{})
 for page != nil {
 	for _, product := range page.Data {
 		fmt.Printf("%+v\n", product)
@@ -332,7 +327,6 @@ To handle errors, we recommend that you use the `errors.As` pattern:
 
 ```go
 _, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-	OrgID:       dackermanstore.String("org_id"),
 	Description: "description",
 	ImageURL:    "image_url",
 	Name:        "name",
@@ -365,7 +359,6 @@ defer cancel()
 client.Products.New(
 	ctx,
 	dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -407,7 +400,6 @@ client := dackermanstore.NewClient(
 client.Products.New(
 	context.TODO(),
 	dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -428,7 +420,6 @@ var response *http.Response
 product, err := client.Products.New(
 	context.TODO(),
 	dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",

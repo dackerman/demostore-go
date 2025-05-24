@@ -26,7 +26,6 @@ func TestUsage(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
