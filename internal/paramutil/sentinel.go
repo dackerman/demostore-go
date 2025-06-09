@@ -1,7 +1,7 @@
 package paramutil
 
 import (
-	"github.com/dackerman/demostore-private-go/v2/internal/encoding/json/sentinel"
+	"github.com/dackerman/demostore-go/v2/internal/encoding/json/sentinel"
 )
 
 // NullPtr returns a pointer to the zero value of the type T.

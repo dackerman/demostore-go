@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"time"
 
-	shimjson "github.com/dackerman/demostore-private-go/v2/internal/encoding/json"
+	shimjson "github.com/dackerman/demostore-go/v2/internal/encoding/json"
 
 	"github.com/tidwall/sjson"
 )

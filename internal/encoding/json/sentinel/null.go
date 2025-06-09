@@ -1,7 +1,7 @@
 package sentinel
 
 import (
-	"github.com/dackerman/demostore-private-go/v2/internal/encoding/json/shims"
+	"github.com/dackerman/demostore-go/v2/internal/encoding/json/shims"
 	"reflect"
 	"sync"
 )
