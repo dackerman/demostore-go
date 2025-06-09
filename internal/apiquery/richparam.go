@@ -1,7 +1,7 @@
 package apiquery
 
 import (
-	"github.com/dackerman/demostore-private-go/v2/packages/param"
+	"github.com/dackerman/demostore-go/v2/packages/param"
 	"reflect"
 )
 
