@@ -39,7 +39,7 @@ func NewProductService(opts ...option.RequestOption) (r ProductService) {
 	return
 }
 
-// Create Product
+// Create Product!
 func (r *ProductService) New(ctx context.Context, params ProductNewParams, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
 	precfg, err := requestconfig.PreRequestOptions(opts...)
