@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go/v2"
-	"github.com/dackerman/demostore-go/v2/internal/testutil"
-	"github.com/dackerman/demostore-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2"
+	"github.com/dackerman/demostore-private-go/v2/internal/testutil"
+	"github.com/dackerman/demostore-private-go/v2/option"
 )
 
 func TestManualPagination(t *testing.T) {
@@ -25,9 +25,7 @@ func TestManualPagination(t *testing.T) {
 		option.WithAuthToken("123e4567-e89b-12d3-a456-426614174000"),
 		option.WithOrgID("my_org"),
 	)
-	page, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{
-		OrgID: dackermanstore.String("org_id"),
-	})
+	page, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{})
 	if err != nil {
 		t.Fatalf("err should be nil: %s", err.Error())
 	}

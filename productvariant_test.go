@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go/v2"
-	"github.com/dackerman/demostore-go/v2/internal/testutil"
-	"github.com/dackerman/demostore-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2"
+	"github.com/dackerman/demostore-private-go/v2/internal/testutil"
+	"github.com/dackerman/demostore-private-go/v2/option"
 )
 
 func TestProductVariantNew(t *testing.T) {
@@ -30,7 +30,6 @@ func TestProductVariantNew(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductVariantNewParams{
-			OrgID:    dackermanstore.String("org_id"),
 			ImageURL: "image_url",
 			Name:     "name",
 			Price:    0,
@@ -62,9 +61,7 @@ func TestProductVariantGet(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		"variant_id",
-		dackermanstore.ProductVariantGetParams{
-			OrgID: dackermanstore.String("org_id"),
-		},
+		dackermanstore.ProductVariantGetParams{},
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -93,7 +90,6 @@ func TestProductVariantUpdate(t *testing.T) {
 		"product_id",
 		"variant_id",
 		dackermanstore.ProductVariantUpdateParams{
-			OrgID:    dackermanstore.String("org_id"),
 			ImageURL: "image_url",
 			Name:     "name",
 			Price:    0,
@@ -124,9 +120,7 @@ func TestProductVariantList(t *testing.T) {
 	_, err := client.Products.Variants.List(
 		context.TODO(),
 		"product_id",
-		dackermanstore.ProductVariantListParams{
-			OrgID: dackermanstore.String("org_id"),
-		},
+		dackermanstore.ProductVariantListParams{},
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -154,9 +148,7 @@ func TestProductVariantDelete(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		"variant_id",
-		dackermanstore.ProductVariantDeleteParams{
-			OrgID: dackermanstore.String("org_id"),
-		},
+		dackermanstore.ProductVariantDeleteParams{},
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error

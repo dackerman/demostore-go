@@ -9,13 +9,13 @@ import (
 	"net/http"
 	"net/url"
 
-	"github.com/dackerman/demostore-go/v2/internal/apijson"
-	"github.com/dackerman/demostore-go/v2/internal/apiquery"
-	"github.com/dackerman/demostore-go/v2/internal/requestconfig"
-	"github.com/dackerman/demostore-go/v2/option"
-	"github.com/dackerman/demostore-go/v2/packages/pagination"
-	"github.com/dackerman/demostore-go/v2/packages/param"
-	"github.com/dackerman/demostore-go/v2/packages/respjson"
+	"github.com/dackerman/demostore-private-go/v2/internal/apijson"
+	"github.com/dackerman/demostore-private-go/v2/internal/apiquery"
+	"github.com/dackerman/demostore-private-go/v2/internal/requestconfig"
+	"github.com/dackerman/demostore-private-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2/packages/pagination"
+	"github.com/dackerman/demostore-private-go/v2/packages/param"
+	"github.com/dackerman/demostore-private-go/v2/packages/respjson"
 )
 
 // ProductService contains methods and other services that help with interacting
@@ -39,7 +39,7 @@ func NewProductService(opts ...option.RequestOption) (r ProductService) {
 	return
 }
 
-// Create Product
+// Create Product!
 func (r *ProductService) New(ctx context.Context, params ProductNewParams, opts ...option.RequestOption) (res *Product, err error) {
 	opts = append(r.Options[:], opts...)
 	precfg, err := requestconfig.PreRequestOptions(opts...)
@@ -211,7 +211,7 @@ func (r *ProductNewParams) UnmarshalJSON(data []byte) error {
 }
 
 type ProductGetParams struct {
-	// The ID of the organization you're a part of
+	// The ID of the organization
 	//
 	// Use [option.WithOrgID] on the client to set a global default for this field.
 	OrgID param.Opt[string] `path:"org_id,omitzero,required" json:"-"`

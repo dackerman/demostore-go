@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go/v2"
-	"github.com/dackerman/demostore-go/v2/internal/testutil"
-	"github.com/dackerman/demostore-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2"
+	"github.com/dackerman/demostore-private-go/v2/internal/testutil"
+	"github.com/dackerman/demostore-private-go/v2/option"
 )
 
 func TestProductNew(t *testing.T) {
@@ -27,7 +27,6 @@ func TestProductNew(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	_, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
@@ -58,9 +57,7 @@ func TestProductGet(t *testing.T) {
 	_, err := client.Products.Get(
 		context.TODO(),
 		"product_id",
-		dackermanstore.ProductGetParams{
-			OrgID: dackermanstore.String("org_id"),
-		},
+		dackermanstore.ProductGetParams{},
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error
@@ -88,7 +85,6 @@ func TestProductUpdate(t *testing.T) {
 		context.TODO(),
 		"product_id",
 		dackermanstore.ProductUpdateParams{
-			OrgID:       dackermanstore.String("org_id"),
 			Description: "description",
 			ImageURL:    "image_url",
 			Name:        "name",
@@ -118,7 +114,6 @@ func TestProductListWithOptionalParams(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	_, err := client.Products.List(context.TODO(), dackermanstore.ProductListParams{
-		OrgID: dackermanstore.String("org_id"),
 		Limit: dackermanstore.Int(0),
 		Skip:  dackermanstore.Int(0),
 	})
@@ -147,9 +142,7 @@ func TestProductDelete(t *testing.T) {
 	_, err := client.Products.Delete(
 		context.TODO(),
 		"product_id",
-		dackermanstore.ProductDeleteParams{
-			OrgID: dackermanstore.String("org_id"),
-		},
+		dackermanstore.ProductDeleteParams{},
 	)
 	if err != nil {
 		var apierr *dackermanstore.Error

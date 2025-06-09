@@ -7,9 +7,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/dackerman/demostore-go/v2"
-	"github.com/dackerman/demostore-go/v2/internal/testutil"
-	"github.com/dackerman/demostore-go/v2/option"
+	"github.com/dackerman/demostore-private-go/v2"
+	"github.com/dackerman/demostore-private-go/v2/internal/testutil"
+	"github.com/dackerman/demostore-private-go/v2/option"
 )
 
 func TestUsage(t *testing.T) {
@@ -26,7 +26,6 @@ func TestUsage(t *testing.T) {
 		option.WithOrgID("my_org"),
 	)
 	product, err := client.Products.New(context.TODO(), dackermanstore.ProductNewParams{
-		OrgID:       dackermanstore.String("org_id"),
 		Description: "description",
 		ImageURL:    "image_url",
 		Name:        "name",
