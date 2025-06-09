@@ -1,6 +1,6 @@
 # Stainless Store Go API Library
 
-<a href="https://pkg.go.dev/github.com/dackerman/demostore-go/v2"><img src="https://pkg.go.dev/badge/github.com/dackerman/demostore-go.svg" alt="Go Reference"></a>
+<a href="https://pkg.go.dev/github.com/dackerman/demostore-go/v2"><img src="https://pkg.go.dev/badge/github.com/dackerman/demostore-go/v2.svg" alt="Go Reference"></a>
 
 The Stainless Store Go library provides convenient access to the [Stainless Store REST API](https://docs.dackerman-store.com)
 from applications written in Go.
@@ -28,7 +28,7 @@ Or to pin the version:
 <!-- x-release-please-start-version -->
 
 ```sh
-go get -u 'github.com/dackerman/demostore-go@v2.0.0'
+go get -u 'github.com/dackerman/demostore-go/v2@v2.0.1'
 ```
 
 <!-- x-release-please-end -->
@@ -281,7 +281,7 @@ client.Products.New(context.TODO(), ...,
 )
 ```
 
-See the [full list of request options](https://pkg.go.dev/github.com/dackerman/demostore-go/option).
+See the [full list of request options](https://pkg.go.dev/github.com/dackerman/demostore-go/v2/option).
 
 ### Pagination
 

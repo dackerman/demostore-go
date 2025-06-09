@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.0.1 (2025-05-20)
+
+Full Changelog: [v2.0.0...v2.0.1](https://github.com/dackerman/demostore-go/compare/v2.0.0...v2.0.1)
+
+### Bug Fixes
+
+* **client:** correctly set stream key for multipart ([3bc911b](https://github.com/dackerman/demostore-go/commit/3bc911b69f7f04f5a2e40e645b7016a5758b0824))
+* **client:** don't panic on marshal with extra null field ([db1bd84](https://github.com/dackerman/demostore-go/commit/db1bd84203bc8474d9a76dc05b90e33f24d1f79f))
+
+
+### Chores
+
+* **internal:** version bump ([2b6b7df](https://github.com/dackerman/demostore-go/commit/2b6b7df09293c6df4f9087f24d8af6947fe65b67))
+
 ## 2.0.0 (2025-05-16)
 
 Full Changelog: [v1.0.0...v2.0.0](https://github.com/dackerman/demostore-go/compare/v1.0.0...v2.0.0)
