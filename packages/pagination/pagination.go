@@ -43,6 +43,9 @@ func (r *OffsetPagination[T]) UnmarshalJSON(data []byte) error {
 // there is no next page, this function will return a 'nil' for the page value, but
 // will not return an error
 func (r *OffsetPagination[T]) GetNextPage() (res *OffsetPagination[T], err error) {
+	if len(r.Data) == 0 {
+		return nil, nil
+	}
 	cfg := r.cfg.Clone(r.cfg.Context)
 
 	next := r.Next
